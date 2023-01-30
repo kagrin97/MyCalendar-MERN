@@ -76,7 +76,7 @@ const createCalendar = async (req, res, next) => {
     return next(error);
   }
 
-  console.log(user);
+  console.error(user);
 
   try {
     const sess = await mongoose.startSession();

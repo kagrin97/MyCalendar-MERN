@@ -105,8 +105,6 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  console.log(isValidPassword);
-
   if (!isValidPassword) {
     const error = new HttpError(ERROR.USER.WRONG, 403);
     return next(error);
