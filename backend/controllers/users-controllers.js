@@ -85,7 +85,6 @@ const signup = async (req, res, next) => {
       process.env.DB_JWT_KEY,
       { expiresIn: "1h" }
     );
-    console.log("sdfsdf");
   } catch (err) {
     const error = new HttpError(
       "가입에 실패했습니다. 나중에 다시 시도해 주세요.",
