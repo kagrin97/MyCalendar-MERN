@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
 const usersRoutes = require("./routes/users-routes");
+const calendarsRoutes = require("./routes/calendar-routes");
 const HttpError = require("./models/http-error");
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use("/api/users", usersRoutes);
+app.use("/api/calendar", calendarsRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError("route를 찾을수 없습니다.", 404);
