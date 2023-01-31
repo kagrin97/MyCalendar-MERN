@@ -84,7 +84,6 @@ const login = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log("aaa");
     return next(new HttpError(ERROR.USER.INPUT, 422));
   }
   const { email, password } = req.body;
@@ -99,7 +98,6 @@ const login = async (req, res, next) => {
   }
 
   if (!existingUser) {
-    console.log("123123");
     const error = new HttpError(ERROR.USER.WRONG, 422);
     return next(error);
   }

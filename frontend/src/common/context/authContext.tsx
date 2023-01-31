@@ -20,6 +20,12 @@ const error = () => ({
   token: null,
 });
 
+const clean = () => ({
+  isLoggedIn: false,
+  userId: null,
+  token: null,
+});
+
 type StateType = {
   isLoggedIn: Boolean;
   userId: string | null;
@@ -28,7 +34,8 @@ type StateType = {
 
 type ActionType =
   | { type: "SET_AUTH_SUCCESS"; data: { userId: string; token: string } }
-  | { type: "SET_AUTH_ERROR" };
+  | { type: "SET_AUTH_ERROR" }
+  | { type: "SET_AUTH_CLEAN" };
 
 type DispatchType = Dispatch<ActionType>;
 
@@ -49,6 +56,11 @@ function AuthReducer(state: StateType, action: ActionType) {
         ...state,
         ...error(),
       };
+    case "SET_AUTH_CLEAN":
+      return {
+        ...state,
+        ...clean(),
+      };
     default:
       return state;
   }
@@ -57,6 +69,7 @@ function AuthReducer(state: StateType, action: ActionType) {
 // 위에서 선언한 두가지 Context 들의 Provider 로 감싸주는 컴포넌트
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(AuthReducer, initialAuthState);
+
   return (
     <AuthStateContext.Provider value={state}>
       <AuthDispatchContext.Provider value={dispatch}>

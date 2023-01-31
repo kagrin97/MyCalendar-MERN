@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import { useHttpClient } from "../../common/hooks/http-hook";
+import { useAuth } from "../../common/hooks/auth-hook";
 
 import {
   useAuthState,
@@ -16,8 +18,10 @@ interface FormValue {
 }
 
 export default function Signup() {
+  const auth = useAuth();
   const authState = useAuthState();
   const dispatch = useAuthDispatch();
+  const navigate = useNavigate();
 
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -41,6 +45,8 @@ export default function Signup() {
         formData
       );
       dispatch({ type: "SET_AUTH_SUCCESS", data: { userId, token } });
+      auth.login(userId, token);
+      navigate("/");
     } catch (err) {
       dispatch({ type: "SET_AUTH_ERROR" });
     }
