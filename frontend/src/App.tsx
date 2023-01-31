@@ -5,13 +5,17 @@ import "./App.css";
 
 import Auth from "./user/pages/Auth";
 
+import { AuthProvider } from "./common/context/authContext";
+
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Auth />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Auth />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
