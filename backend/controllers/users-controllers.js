@@ -48,10 +48,17 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
+  try {
+    hashedPassword = await bcrypt.hash(password, 12);
+  } catch (err) {
+    const error = new HttpError(ERROR.USER.SERVER, 500);
+    return next(error);
+  }
+
   const createdUser = new User({
     name,
     email,
-    image: req.file.path,
+    image: req.file?.path || "uploads/images/default-Avatar.png",
     password: hashedPassword,
     calendars: [],
   });

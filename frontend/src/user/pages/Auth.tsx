@@ -5,6 +5,7 @@ import "./Auth.css";
 
 import Signup from "../components/Signup";
 import Login from "../components/Login";
+import Button from "../../common/components/UIElements/Button";
 
 import Card from "../../common/components/UIElements/Card";
 
@@ -16,9 +17,11 @@ export default function Auth() {
   };
 
   return (
-    <Card>
+    <Card className="center">
       {authMode ? <Signup /> : <Login />}
-      <button onClick={toggleAuthMode}>로그인으로 전환</button>
+      <Button inverse onClick={toggleAuthMode}>
+        {authMode ? "로그인페이지로" : "회원가입페이지로"}
+      </Button>
     </Card>
   );
 }

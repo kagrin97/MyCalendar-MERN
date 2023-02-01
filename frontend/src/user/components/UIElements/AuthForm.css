@@ -1,0 +1,42 @@
+.form-control {
+  margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control small {
+  display: block;
+}
+
+.form-control button {
+  margin: 1.5rem 0;
+}
+
+.form-control__items {
+  margin: 1rem 0;
+}
+
+.form-control__items label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-control__items input {
+  width: 100%;
+  font: inherit;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  padding: 0.15rem 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-control__items input:focus {
+  outline: none;
+  background: #ebebeb;
+  border-color: #510077;
+}
+
+.form-control__items small {
+  color: red;
+  margin-bottom: 0.5rem;
+}

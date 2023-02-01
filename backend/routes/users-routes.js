@@ -14,7 +14,7 @@ router.post(
   [
     check("name").not().isEmpty(),
     check("email").normalizeEmail().isEmail(),
-    check("password").isLength({ min: 6 }),
+    check("password").isLength({ min: 7 }),
   ],
   usersController.signup
 );
@@ -23,7 +23,7 @@ router.post(
   "/login",
   [
     check("email").normalizeEmail().isEmail(),
-    check("password").isLength({ min: 6 }),
+    check("password").isLength({ min: 7 }),
   ],
   usersController.login
 );
