@@ -28,4 +28,10 @@ router.post(
   usersController.login
 );
 
+router.post(
+  "/checkExistingEmail",
+  [check("email").normalizeEmail().isEmail()],
+  usersController.checkExistingEmail
+);
+
 module.exports = router;

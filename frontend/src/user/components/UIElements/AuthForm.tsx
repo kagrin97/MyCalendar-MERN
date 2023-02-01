@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 import "./AuthForm.css";
 
+import { useHttpClient } from "../../../common/hooks/http-hook";
 import Button from "../../../common/components/UIElements/Button";
 
 interface FormValue {
@@ -21,23 +22,6 @@ const AuthForm = (props: any) => {
     getValues,
   } = useForm<FormValue>({ mode: "onChange" });
 
-  const [imgFile, setImgFile] = useState("img/default-Avatar.png");
-  const imgRef: any = useRef();
-
-  const saveImgFile = () => {
-    if (imgRef.current.files.length === 0) {
-      setImgFile("img/default-Avatar.png");
-      return;
-    }
-
-    const file = imgRef.current.files[0];
-    const reader: any = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    };
-  };
-
   return (
     <form className="form-control" onSubmit={handleSubmit(props.onSubmit)}>
       <div className="form-control__items ">
@@ -52,6 +36,14 @@ const AuthForm = (props: any) => {
               value:
                 /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
               message: "이메일 형식에 맞지 않습니다.",
+            },
+
+            validate: {
+              check: async (email) => {
+                if (props.signup) {
+                  return props.checkExistingUser(email);
+                }
+              },
             },
           })}
         />
@@ -127,7 +119,7 @@ const AuthForm = (props: any) => {
           <div className="form-control__items container-img">
             <label htmlFor="picture">프로필 사진</label>
             <div className="form-control__items-img center">
-              <img src={imgFile} alt="프로필 이미지" />
+              <img src={props.imgFile} alt="프로필 이미지" />
             </div>
             <input
               {...register("image")}
@@ -135,8 +127,8 @@ const AuthForm = (props: any) => {
               type="file"
               className="hidden"
               accept="image/*"
-              onChange={saveImgFile}
-              ref={imgRef}
+              onChange={props.savePreViewFile}
+              ref={props.imgRef}
             />
             <small role="alert">
               선택하지 않을 시 기본이미지가 적용됩니다.

@@ -18,6 +18,24 @@ const getUsers = async (req, res, next) => {
   res.json({ users: users.map((user) => user.toObject({ getters: true })) });
 };
 
+const checkExistingEmail = async (req, res, next) => {
+  const { email } = req.body;
+  let existingUser;
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (err) {
+    const error = new HttpError(ERROR.USER.SERVER, 500);
+    return next(error);
+  }
+
+  if (existingUser) {
+    const error = new HttpError(ERROR.USER.EXIST, 422);
+    return next(error);
+  }
+
+  res.status(200).json({});
+};
+
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
 
@@ -29,7 +47,7 @@ const signup = async (req, res, next) => {
 
   let existingUser;
   try {
-    existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({ email });
   } catch (err) {
     const error = new HttpError(ERROR.USER.SERVER, 500);
     return next(error);
@@ -144,3 +162,4 @@ const login = async (req, res, next) => {
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+exports.checkExistingEmail = checkExistingEmail;
