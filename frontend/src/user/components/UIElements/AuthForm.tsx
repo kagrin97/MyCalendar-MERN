@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import "./AuthForm.css";
@@ -20,6 +20,23 @@ const AuthForm = (props: any) => {
     formState: { errors },
     getValues,
   } = useForm<FormValue>({ mode: "onChange" });
+
+  const [imgFile, setImgFile] = useState("img/default-Avatar.png");
+  const imgRef: any = useRef();
+
+  const saveImgFile = () => {
+    if (imgRef.current.files.length === 0) {
+      setImgFile("img/default-Avatar.png");
+      return;
+    }
+
+    const file = imgRef.current.files[0];
+    const reader: any = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+    };
+  };
 
   return (
     <form className="form-control" onSubmit={handleSubmit(props.onSubmit)}>
@@ -107,15 +124,23 @@ const AuthForm = (props: any) => {
             )}
           </div>
 
-          <div className="form-control__items">
+          <div className="form-control__items container-img">
             <label htmlFor="picture">프로필 사진</label>
+            <div className="form-control__items-img center">
+              <img src={imgFile} alt="프로필 이미지" />
+            </div>
             <input
               {...register("image")}
               id="picture"
               type="file"
               className="hidden"
               accept="image/*"
+              onChange={saveImgFile}
+              ref={imgRef}
             />
+            <small role="alert">
+              선택하지 않을 시 기본이미지가 적용됩니다.
+            </small>
           </div>
 
           <Button type="submit">회원가입</Button>
