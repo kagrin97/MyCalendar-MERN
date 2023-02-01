@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
+import MainNavigation from "./common/components/Navigation/MainNavigation";
 import Auth from "./user/pages/Auth";
 import Home from "./user/pages/Home";
 
@@ -28,6 +29,7 @@ function App() {
   }
   return (
     <Router>
+      <MainNavigation />
       <main>{routes}</main>
     </Router>
   );
