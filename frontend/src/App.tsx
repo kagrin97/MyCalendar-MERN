@@ -5,7 +5,7 @@ import "./App.css";
 
 import MainNavigation from "./common/components/Navigation/MainNavigation";
 import Auth from "./user/pages/Auth";
-import Home from "./user/pages/Home";
+import Calendars from "./calendar/pages/Calendars";
 
 import { useAuth } from "./common/hooks/auth-hook";
 
@@ -16,13 +16,13 @@ function App() {
   if (token) {
     routes = (
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Calendars />} />
       </Routes>
     );
   } else {
     routes = (
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Calendars />} />
         <Route path="/auth" element={<Auth />} />
       </Routes>
     );

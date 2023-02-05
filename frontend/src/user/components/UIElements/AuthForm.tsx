@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 import "./AuthForm.css";
 
-import { useHttpClient } from "../../../common/hooks/http-hook";
 import Button from "../../../common/components/UIElements/Button";
 
 interface FormValue {

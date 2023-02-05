@@ -13,7 +13,7 @@ export default function Signup() {
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
 
   const onSubmit = async (data: any) => {
     try {
