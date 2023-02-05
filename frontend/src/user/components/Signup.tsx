@@ -42,6 +42,7 @@ export default function Signup() {
   const imgRef: any = useRef();
 
   const savePreViewFile = () => {
+    console.log(imgRef.current);
     if (imgRef.current.files.length === 0) {
       setImgFile("img/default-Avatar.png");
       return;
@@ -75,6 +76,7 @@ export default function Signup() {
     <AuthForm
       onSubmit={onSubmit}
       imgFile={imgFile}
+      imgRef={imgRef}
       savePreViewFile={savePreViewFile}
       checkExistingUser={checkExistingUser}
       signup={true}
