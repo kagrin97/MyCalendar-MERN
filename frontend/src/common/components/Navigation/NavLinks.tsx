@@ -12,7 +12,7 @@ const NavLinks = (props: any) => {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink to="/">유저 목록</NavLink>
+        <NavLink to="/">나의 캘린더</NavLink>
       </li>
       {auth.isLoggedIn && (
         <li>

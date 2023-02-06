@@ -169,8 +169,19 @@ const deleteCalendar = async (req, res, next) => {
   res.status(200).json({ message: "Deleted calendar." });
 };
 
+const uploadImgCalendar = (req, res, next) => {
+  try {
+    const imgURL = req.file?.path;
+    return res.status(200).json({ imgURL });
+  } catch (err) {
+    const error = new HttpError(ERROR.CALENDAR.SERVER, 500);
+    return next(error);
+  }
+};
+
 exports.getCalendarById = getCalendarById;
 exports.getCalendarsByUserId = getCalendarsByUserId;
 exports.createCalendar = createCalendar;
 exports.updateCalendar = updateCalendar;
 exports.deleteCalendar = deleteCalendar;
+exports.uploadImgCalendar = uploadImgCalendar;

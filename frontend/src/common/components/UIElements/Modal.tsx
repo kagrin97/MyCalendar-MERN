@@ -8,14 +8,10 @@ import "./Modal.css";
 const ModalOverlay = (props: any) => {
   const content = (
     <div className={`modal ${props.className}`} style={props.style}>
-      <header className={`modal__header ${props.headerClass}`}>
-        <h2>{props.header}</h2>
-      </header>
-
-      <div className={`modal__content ${props.contentClass}`}>
-        {props.children}
+      <div className={`modal__content center ${props.contentClass}`}>
+        <h2>{props.children}</h2>
       </div>
-      <footer className={`modal__footer ${props.footerClass}`}>
+      <footer className={`modal__footer center ${props.footerClass}`}>
         {props.footer}
       </footer>
     </div>

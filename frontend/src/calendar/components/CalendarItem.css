@@ -1,3 +1,25 @@
+.calendar-detail {
+  margin: 0 0.5rem;
+}
+
+.form__title {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 0.2rem;
+  border-color: rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+}
+
 small {
   display: block;
+  color: red;
+  margin-top: 1rem;
+}
+
+.calendar-detail__description {
+  margin: 2rem 0;
+}
+
+button {
+  margin: 1rem;
 }

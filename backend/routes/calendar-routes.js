@@ -3,6 +3,7 @@ const { check } = require("express-validator");
 
 const calendarControllers = require("../controllers/calendar-controllers");
 // const checkAuth = require("../middleware/check-auth");
+const fileUpload = require("../middleware/file-upload");
 
 const router = express.Router();
 
@@ -12,6 +13,12 @@ router.get("/user/:uid", calendarControllers.getCalendarsByUserId);
 
 // jwt 유효성검사 미들웨어
 // router.use(checkAuth);
+
+router.post(
+  "/uploadImg",
+  fileUpload.single("image"),
+  calendarControllers.uploadImgCalendar
+);
 
 router.post(
   "/",
