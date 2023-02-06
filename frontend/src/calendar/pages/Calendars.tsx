@@ -18,11 +18,11 @@ interface CalendarType {
 
 export default function Calendars() {
   const [value, onChange] = useState(new Date());
+  const [calendarDate, setCalendarDate] = useState<string | undefined>();
   const [calendarList, setCalendarList] = useState([]);
   const [calendar, setCalendar] = useState<CalendarType>();
-  const [calendarDate, setCalendarDate] = useState<string | undefined>();
 
-  const { userId } = useAuthState();
+  const { userId, token } = useAuthState();
 
   const { isLoading, sendRequest } = useHttpClient();
 
@@ -47,6 +47,7 @@ export default function Calendars() {
 
   const closeModal = () => {
     setShowModal(!setShowModal);
+    setCalendarDate(undefined);
   };
 
   // setState를 동기로 받기위한 처리
@@ -65,24 +66,30 @@ export default function Calendars() {
   };
 
   return (
-    <div>
-      <Calendar
-        onChange={onChange}
-        value={value}
-        onClickDay={getCalendarByDate}
-      />
-      <Modal
-        show={showModal}
-        onCancel={closeModal}
-        header={calendarDate}
-        footer={<Button onClick={closeModal}>닫기</Button>}
-      >
-        <CalendarItem
-          calendar={calendar}
-          setCalendar={setCalendar}
-          calendarDate={calendarDate}
-        />
-      </Modal>
+    <div className="center">
+      {token ? (
+        <React.Fragment>
+          <Calendar
+            onChange={onChange}
+            value={value}
+            onClickDay={getCalendarByDate}
+          />
+          <Modal
+            show={showModal}
+            onCancel={closeModal}
+            header={calendarDate}
+            footer={<Button onClick={closeModal}>닫기</Button>}
+          >
+            <CalendarItem
+              calendar={calendar}
+              setCalendar={setCalendar}
+              calendarDate={calendarDate}
+            />
+          </Modal>
+        </React.Fragment>
+      ) : (
+        "로그인을 먼저 해주세요"
+      )}
     </div>
   );
 }

@@ -56,10 +56,12 @@ const createCalendar = async (req, res, next) => {
     return next(new HttpError(ERROR.CALENDAR.INPUT, 422));
   }
 
-  const { detail, userId } = req.body;
+  const { title, description, userId, createdDate } = req.body;
 
   const createdCalendar = new Calendar({
-    detail,
+    title,
+    description,
+    createdDate,
     creator: userId,
   });
 
@@ -99,7 +101,7 @@ const updateCalendar = async (req, res, next) => {
     return next(new HttpError(ERROR.CALENDAR.INPUT, 422));
   }
 
-  const { detail } = req.body;
+  const { title, description } = req.body;
   const calendarId = req.params.cid;
 
   let calendar;
@@ -115,7 +117,8 @@ const updateCalendar = async (req, res, next) => {
   //     return next(error);
   //   }
 
-  calendar.detail = detail;
+  calendar.title = title;
+  calendar.description = description;
 
   try {
     await calendar.save();

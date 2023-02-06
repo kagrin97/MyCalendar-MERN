@@ -15,13 +15,18 @@ router.get("/user/:uid", calendarControllers.getCalendarsByUserId);
 
 router.post(
   "/",
-  [check("detail").isLength({ min: 1 }), check("userId").not().isEmpty()],
+  [
+    check("title").isLength({ min: 1 }),
+    check("description").isLength({ min: 1 }),
+    check("userId").not().isEmpty(),
+  ],
   calendarControllers.createCalendar
 );
 
 router.patch(
   "/:cid",
-  [check("detail").not().isEmpty()],
+  check("title").isLength({ min: 1 }),
+  check("description").isLength({ min: 1 }),
   calendarControllers.updateCalendar
 );
 
