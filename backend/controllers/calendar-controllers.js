@@ -144,7 +144,7 @@ const deleteCalendar = async (req, res, next) => {
     return next(error);
   }
 
-  if (calendar.id !== req.userData.userId) {
+  if (calendar.creator.id !== req.userData.userId) {
     const error = new HttpError(ERROR.USER.AUTH, 401);
     return next(error);
   }
