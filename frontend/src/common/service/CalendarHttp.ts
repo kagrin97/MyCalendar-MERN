@@ -73,6 +73,7 @@ export const CalendarHttp = {
       "DELETE",
       null,
       {
+        "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       }
     );

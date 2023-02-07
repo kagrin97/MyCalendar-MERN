@@ -74,10 +74,18 @@
 
 /* 날짜 선택 됐을 때 day 타일 커스텀하기 */
 .react-calendar__tile--active {
-  color: white;
+  color: black;
+  background: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
 .calendar-icon {
   height: 10px;
   color: black;
+}
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -11,6 +11,7 @@ import { useAuth } from "../../common/hooks/auth-hook";
 import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
 
 import { BsCheckLg } from "react-icons/bs";
+import CalendarCard from "../../common/components/UIElements/CalendarCard";
 
 export default function Calendars() {
   const navigate = useNavigate();
@@ -35,28 +36,36 @@ export default function Calendars() {
     }
   }, [userId]);
 
+  const [cardContents, setCardContents] = useState<any>();
+
   // setState를 동기로 받기위한 처리
   useEffect(() => {
     const getCalendarDetail = () => {
       const foundCalendar = calendarList.filter(
         (item: any) => item.createdDate === calendarDate
       )[0];
-
-      navigate("/detail", {
-        state: { calendar: foundCalendar, calendarDate },
-      });
+      setCardContents(foundCalendar);
     };
     if (calendarDate) {
-      try {
-        getCalendarDetail();
-      } catch (err) {
-        navigate("/detail", { state: { calendar: null, calendarDate } });
-      }
+      getCalendarDetail();
     }
   }, [calendarDate]);
 
+  const onClickDetail = () => {
+    if (cardContents) {
+      navigate("/detail", {
+        state: { calendar: cardContents, calendarDate },
+      });
+      return;
+    }
+    navigate("/detail", { state: { calendar: null, calendarDate } });
+  };
+
+  const [showCard, setShowCard] = useState(false);
+
   const getCalendarByDate = (day: any) => {
     setCalendarDate(fomatDate(day));
+    setShowCard(true);
   };
 
   const existingCalendar = (date: Date) => {
@@ -74,7 +83,7 @@ export default function Calendars() {
     <div className="center">
       {isLoading && <LoadingSpinner asOverlay />}
       {token ? (
-        <React.Fragment>
+        <div className="calendar-container">
           <Calendar
             onChange={onChange}
             value={value}
@@ -93,7 +102,10 @@ export default function Calendars() {
               ) : null
             }
           />
-        </React.Fragment>
+          {showCard && cardContents && (
+            <CalendarCard onClick={onClickDetail} cardContents={cardContents} />
+          )}
+        </div>
       ) : (
         <div className="container center">
           <h3>로그인을 먼저 해주세요</h3>
