@@ -25,6 +25,7 @@ import {
   deleteCalendarType,
 } from "../../common/types/calendar";
 import { useAuth } from "../../common/hooks/auth-hook";
+import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
 
 interface FormValue {
   title: string;
@@ -120,6 +121,7 @@ export default function CalendarItem(props: any) {
 
   return (
     <React.Fragment>
+      {isLoading && <LoadingSpinner />}
       <ErrorModal error={error} onClear={clearError} />
       <Card>
         <div className="calendar-detail">

@@ -8,6 +8,7 @@ import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import "@toast-ui/editor/dist/i18n/ko-kr";
 import { useHttpClient } from "../../common/hooks/http-hook";
 import { HookMap } from "@toast-ui/editor/types/editor";
+import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
 
 export default function ToastEditor(props: any) {
   const { isLoading, sendRequest } = useHttpClient();
@@ -29,6 +30,7 @@ export default function ToastEditor(props: any) {
 
   return (
     <div>
+      {isLoading && <LoadingSpinner />}
       <h3>내용 입력</h3>
       <Editor
         ref={props.editorRef}

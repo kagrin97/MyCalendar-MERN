@@ -1,11 +1,12 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import AuthForm from "./UIElements/AuthForm";
 
 import { useHttpClient } from "../../common/hooks/http-hook";
 import { useAuth } from "../../common/hooks/auth-hook";
-
 import { useAuthDispatch } from "../../common/context/authContext";
+import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -33,5 +34,10 @@ export default function Login() {
     }
   };
 
-  return <AuthForm onSubmit={onSubmit} />;
+  return (
+    <React.Fragment>
+      {isLoading && <LoadingSpinner asOverlay />}
+      <AuthForm onSubmit={onSubmit} />
+    </React.Fragment>
+  );
 }

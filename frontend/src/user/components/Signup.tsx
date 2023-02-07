@@ -1,12 +1,13 @@
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AuthForm from "./UIElements/AuthForm";
 
 import { useHttpClient } from "../../common/hooks/http-hook";
 import { useAuth } from "../../common/hooks/auth-hook";
-
 import { useAuthDispatch } from "../../common/context/authContext";
-import { useRef, useState } from "react";
+
+import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
 
 export default function Signup() {
   const auth = useAuth();
@@ -73,13 +74,16 @@ export default function Signup() {
   };
 
   return (
-    <AuthForm
-      onSubmit={onSubmit}
-      imgFile={imgFile}
-      imgRef={imgRef}
-      savePreViewFile={savePreViewFile}
-      checkExistingUser={checkExistingUser}
-      signup={true}
-    />
+    <React.Fragment>
+      {isLoading && <LoadingSpinner asOverlay />}
+      <AuthForm
+        onSubmit={onSubmit}
+        imgFile={imgFile}
+        imgRef={imgRef}
+        savePreViewFile={savePreViewFile}
+        checkExistingUser={checkExistingUser}
+        signup={true}
+      />
+    </React.Fragment>
   );
 }
