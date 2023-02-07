@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import "./App.css";
-
 import MainNavigation from "./common/components/Navigation/MainNavigation";
 import Auth from "./user/pages/Auth";
 import Calendars from "./calendar/pages/Calendars";

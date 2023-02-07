@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
+:root {
+  --color-clear-purple: #510077;
+  --color-deep-purple: #625580;
+  --color-middle-purple: #9c86cb;
+  --color-light-purple: #eac1f8;
+  --color-black: #292929;
+}
+
 * {
   box-sizing: border-box;
 }

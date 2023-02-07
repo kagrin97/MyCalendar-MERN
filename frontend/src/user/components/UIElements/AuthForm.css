@@ -33,7 +33,7 @@
 .form-control__items input:focus {
   outline: none;
   background: #ebebeb;
-  border-color: #510077;
+  border-color: var(--color-clear-purple);
 }
 
 .form-control__items small {
