@@ -9,7 +9,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "react-icons": "^4.7.1"
+  },
   "devDependencies": {},
   "description": ""
 }

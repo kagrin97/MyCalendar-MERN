@@ -10,6 +10,8 @@ import { getAllCalendarHandler } from "../../common/api/calendarApi";
 import { useAuth } from "../../common/hooks/auth-hook";
 import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
 
+import { BsCheckLg } from "react-icons/bs";
+
 export default function Calendars() {
   const navigate = useNavigate();
 
@@ -57,6 +59,17 @@ export default function Calendars() {
     setCalendarDate(fomatDate(day));
   };
 
+  const existingCalendar = (date: Date) => {
+    if (calendarList) {
+      for (let cal of calendarList) {
+        if (cal["createdDate"] === fomatDate(date)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   return (
     <div className="center">
       {isLoading && <LoadingSpinner asOverlay />}
@@ -66,10 +79,25 @@ export default function Calendars() {
             onChange={onChange}
             value={value}
             onClickDay={getCalendarByDate}
+            formatDay={(locale, date) =>
+              date.toLocaleString("en", { day: "numeric" })
+            }
+            next2Label={null}
+            prev2Label={null}
+            showNeighboringMonth={false}
+            tileContent={({ activeStartDate, date, view }) =>
+              view === "month" && existingCalendar(date) ? (
+                <div className="calendar-icon">
+                  <BsCheckLg />
+                </div>
+              ) : null
+            }
           />
         </React.Fragment>
       ) : (
-        "로그인을 먼저 해주세요"
+        <div className="container center">
+          <h3>로그인을 먼저 해주세요</h3>
+        </div>
       )}
     </div>
   );

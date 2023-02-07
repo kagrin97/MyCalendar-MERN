@@ -1,4 +1,83 @@
+.container {
+  height: 100vh;
+}
+
+.react-calendar {
+  border-radius: 0.5rem;
+  max-width: 500px;
+  width: 90%;
+  height: 50%;
+}
+
+.react-calendar__tile {
+  height: 4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.3rem;
+}
+
+.react-calendar__tile abbr {
+  display: inline-block;
+  height: 1.7rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+/* 오늘 표시 */
 .react-calendar__tile--now {
-  background: ;
-  color: ;
+  background: none;
+}
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: none;
+}
+
+.react-calendar__tile--now abbr {
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--color-middle-purple);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 달력 년/월 표시 글씨 커스텀 */
+.react-calendar__navigation__label > span {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* 요일 section */
+.react-calendar__month-view__weekdays {
+  background: var(--color-deep-purple);
+  color: white;
+}
+
+.react-calendar__month-view__weekdays abbr {
+  text-decoration: none;
+}
+
+/* day 타일 hover, focus 시 모양 커스텀 */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+/* 날짜 선택 됐을 때 day 타일 커스텀하기 */
+.react-calendar__tile--active {
+  color: white;
+}
+
+.calendar-icon {
+  height: 10px;
+  color: black;
 }
