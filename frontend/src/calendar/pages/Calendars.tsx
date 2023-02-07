@@ -4,9 +4,9 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import { useHttpClient } from "../../common/hooks/http-hook";
-import { useAuthState } from "../../common/context/authContext";
 import { fomatDate } from "../../common/utils/fomatDate";
 import { getAllCalendarHandler } from "../../common/api/calendarApi";
+import { useAuth } from "../../common/hooks/auth-hook";
 
 export default function Calendars() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Calendars() {
   const [calendarDate, setCalendarDate] = useState<string | undefined>();
   const [calendarList, setCalendarList] = useState([]);
 
-  const { userId, token } = useAuthState();
+  const { userId, token } = useAuth();
 
   const { isLoading, sendRequest } = useHttpClient();
 

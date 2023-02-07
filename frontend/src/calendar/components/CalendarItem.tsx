@@ -7,7 +7,6 @@ import ToastEditor from "./ToastEditor";
 import ToastViewer from "./ToastViewer";
 import Button from "../../common/components/UIElements/Button";
 import ErrorModal from "../../common/components/UIElements/ErrorModal";
-import { useAuthState } from "../../common/context/authContext";
 import { useHttpClient } from "../../common/hooks/http-hook";
 
 import { Editor } from "@toast-ui/react-editor";
@@ -25,6 +24,7 @@ import {
   updateCalendarType,
   deleteCalendarType,
 } from "../../common/types/calendar";
+import { useAuth } from "../../common/hooks/auth-hook";
 
 interface FormValue {
   title: string;
@@ -33,7 +33,7 @@ interface FormValue {
 
 export default function CalendarItem(props: any) {
   const { isLoading, sendRequest, error, clearError } = useHttpClient();
-  const { userId } = useAuthState();
+  const { userId, token } = useAuth();
 
   const {
     register,
@@ -68,6 +68,7 @@ export default function CalendarItem(props: any) {
         calendarId: props.calendar.id,
         sendRequest,
         editorRef,
+        token,
       };
       const calendar = await updateCalendarHandler(updateCalendarProps);
 
@@ -85,6 +86,7 @@ export default function CalendarItem(props: any) {
         userId,
         sendRequest,
         editorRef,
+        token,
       };
       const calendar = await createCalendarHandler(createCalendarProps);
 
@@ -107,8 +109,9 @@ export default function CalendarItem(props: any) {
         const deleteCalendarProps: deleteCalendarType = {
           calendarId: props.calendar._id,
           sendRequest,
+          token,
         };
-        const message = deleteCalendarHandler(deleteCalendarProps);
+        const message = await deleteCalendarHandler(deleteCalendarProps);
         console.info(message);
         props.setCalendar(undefined);
       } catch (err: any) {

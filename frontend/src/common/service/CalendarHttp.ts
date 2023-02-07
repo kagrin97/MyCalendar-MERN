@@ -22,6 +22,7 @@ export const CalendarHttp = {
     userId,
     sendRequest,
     editorRef,
+    token,
   }: CreateCalendarType) {
     const htmlContent = editorRef.current?.getInstance().getHTML() || "";
     const httpBody = {
@@ -36,6 +37,7 @@ export const CalendarHttp = {
       JSON.stringify(httpBody),
       {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       }
     );
     return calendar;
@@ -46,6 +48,7 @@ export const CalendarHttp = {
     calendarId,
     sendRequest,
     editorRef,
+    token,
   }: updateCalendarType) {
     const htmlContent = editorRef.current?.getInstance().getHTML() || "";
     const httpBody = {
@@ -58,15 +61,20 @@ export const CalendarHttp = {
       JSON.stringify(httpBody),
       {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       }
     );
     return calendar;
   },
 
-  async deleteCalendar({ calendarId, sendRequest }: deleteCalendarType) {
+  async deleteCalendar({ calendarId, sendRequest, token }: deleteCalendarType) {
     const { message } = await sendRequest(
       `http://localhost:5000/api/calendar/${calendarId}`,
-      "DELETE"
+      "DELETE",
+      null,
+      {
+        Authorization: "Bearer " + token,
+      }
     );
     return message;
   },

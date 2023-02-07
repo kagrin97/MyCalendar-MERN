@@ -1,19 +1,21 @@
-export interface CreateCalendarType {
+interface handlingCalendarTyep {
+  sendRequest: any;
+  token: string | null;
+}
+
+export interface CreateCalendarType extends handlingCalendarTyep {
   title: string;
   createdDate: string;
   userId: string | null;
-  sendRequest: any;
   editorRef: any;
 }
 
-export interface updateCalendarType {
+export interface updateCalendarType extends handlingCalendarTyep {
   title: string;
   calendarId: string | null;
-  sendRequest: any;
   editorRef: any;
 }
 
-export interface deleteCalendarType {
+export interface deleteCalendarType extends handlingCalendarTyep {
   calendarId: string | null;
-  sendRequest: any;
 }

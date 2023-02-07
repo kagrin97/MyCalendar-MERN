@@ -12,6 +12,7 @@ const USER = {
   INPUT: "잘못된 입력이 전달되었습니다. 데이터를 확인하십시오.",
   EXIST: "사용자가 이미 존재합니다. 대신 로그인하십시오.",
   WRONG: "아이디 패스워드를 다시 확인 해주세요.",
+  AUTH: "권한이 존재하지 않습니다.",
 };
 
 exports.CALENDAR = CALENDAR;

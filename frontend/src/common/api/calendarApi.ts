@@ -17,6 +17,7 @@ export const createCalendarHandler = ({
   userId,
   sendRequest,
   editorRef,
+  token,
 }: CreateCalendarType) =>
   CalendarHttp.createCalendar({
     title,
@@ -24,6 +25,7 @@ export const createCalendarHandler = ({
     userId,
     sendRequest,
     editorRef,
+    token,
   });
 
 export const updateCalendarHandler = ({
@@ -31,16 +33,19 @@ export const updateCalendarHandler = ({
   calendarId,
   sendRequest,
   editorRef,
+  token,
 }: updateCalendarType) =>
   CalendarHttp.updateCalendar({
     title,
     calendarId,
     sendRequest,
     editorRef,
+    token,
   });
 
 export const deleteCalendarHandler = ({
   calendarId,
   sendRequest,
+  token,
 }: deleteCalendarType) =>
-  CalendarHttp.deleteCalendar({ calendarId, sendRequest });
+  CalendarHttp.deleteCalendar({ calendarId, sendRequest, token });

@@ -1,30 +1,28 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { useAuthState } from "../../context/authContext";
 import "./NavLinks.css";
 import { useAuth } from "../../hooks/auth-hook";
 
 const NavLinks = (props: any) => {
-  const auth = useAuthState();
-  const { logout } = useAuth();
+  const { token, logout, userId } = useAuth();
 
   return (
     <ul className="nav-links">
       <li>
         <NavLink to="/">나의 캘린더</NavLink>
       </li>
-      {auth.isLoggedIn && (
+      {token && (
         <li>
-          <NavLink to={`/${auth.userId}/calendar`}>나의 캘린더</NavLink>
+          <NavLink to={`/${userId}/calendar`}>나의 캘린더</NavLink>
         </li>
       )}
-      {!auth.isLoggedIn && (
+      {!token && (
         <li>
           <NavLink to="/auth">회원가입 / 로그인</NavLink>
         </li>
       )}
-      {auth.isLoggedIn && (
+      {token && (
         <li>
           <button onClick={logout}>LOGOUT</button>
         </li>

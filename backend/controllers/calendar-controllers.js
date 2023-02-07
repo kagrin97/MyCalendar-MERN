@@ -78,8 +78,6 @@ const createCalendar = async (req, res, next) => {
     return next(error);
   }
 
-  console.error(user);
-
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
@@ -112,10 +110,10 @@ const updateCalendar = async (req, res, next) => {
     return next(error);
   }
 
-  //   if (calendar.creator.toString() !== req.userData.userId) {
-  //     const error = new HttpError("이 캘린더를 편집할 권한이 없습니다.", 401);
-  //     return next(error);
-  //   }
+  if (calendar.creator.toString() !== req.userData.userId) {
+    const error = new HttpError(ERROR.USER.AUTH, 401);
+    return next(error);
+  }
 
   calendar.title = title;
   calendar.description = description;
@@ -146,13 +144,10 @@ const deleteCalendar = async (req, res, next) => {
     return next(error);
   }
 
-  //   if (calendar.id !== req.userData.userId) {
-  //     const error = new HttpError(
-  //       "이 캘린더를 편집할 권한이 없습니다.",
-  //       401
-  //     );
-  //     return next(error);
-  //   }
+  if (calendar.id !== req.userData.userId) {
+    const error = new HttpError(ERROR.USER.AUTH, 401);
+    return next(error);
+  }
 
   try {
     const sess = await mongoose.startSession();
@@ -166,7 +161,7 @@ const deleteCalendar = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(200).json({ message: "Deleted calendar." });
+  res.status(200).json({ message: "캘린더 삭제 완료." });
 };
 
 const uploadImgCalendar = (req, res, next) => {
