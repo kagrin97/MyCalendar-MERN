@@ -23,3 +23,12 @@ small {
 button {
   margin: 1rem;
 }
+
+.calendar-detail__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-detail__header p {
+  opacity: 0.5;
+}

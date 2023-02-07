@@ -173,7 +173,10 @@ export default function CalendarItem(props: any) {
             </form>
           ) : (
             <React.Fragment>
-              <h2>{props.calendar?.title || "제목"}</h2>
+              <div className="calendar-detail__header">
+                <h2>{props.calendar?.title || "제목"}</h2>
+                <p>{props.calendar.createdDate.replaceAll("-", " | ")}</p>
+              </div>
               <div className="calendar-detail__description">
                 {props.calendar?.description ? (
                   <ToastViewer {...props} />
@@ -189,9 +192,11 @@ export default function CalendarItem(props: any) {
                 <Button inverse onClick={toggleEditMode}>
                   {isEdit ? "수정 취소" : "수정하기"}
                 </Button>
-                <Button danger onClick={() => setShowInformModal(true)}>
-                  삭제하기
-                </Button>
+                {!isEdit && (
+                  <Button danger onClick={() => setShowInformModal(true)}>
+                    삭제하기
+                  </Button>
+                )}
               </React.Fragment>
             ) : (
               <Button inverse onClick={toggleEditMode}>
