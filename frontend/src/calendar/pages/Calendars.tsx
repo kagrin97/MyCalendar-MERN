@@ -23,12 +23,8 @@ export default function Calendars() {
     async function getAllCalendarList() {
       try {
         const foundList = await getAllCalendarHandler(userId, sendRequest);
-        if (foundList) {
-          setCalendarList(foundList);
-        }
-      } catch (err: any) {
-        console.error(err.message);
-      }
+        setCalendarList(foundList);
+      } catch (err) {}
     }
     if (userId) {
       getAllCalendarList();

@@ -71,11 +71,8 @@ export default function CalendarItem(props: any) {
         token,
       };
       const calendar = await updateCalendarHandler(updateCalendarProps);
-
       applyCalendar(calendar);
-    } catch (err: any) {
-      console.error(err.message);
-    }
+    } catch (err) {}
   };
 
   const onCreateCalendar = async (data: any) => {
@@ -91,9 +88,7 @@ export default function CalendarItem(props: any) {
       const calendar = await createCalendarHandler(createCalendarProps);
 
       applyCalendar(calendar);
-    } catch (err: any) {
-      return err.message;
-    }
+    } catch (err) {}
   };
 
   const [showInformModal, setShowInformModal] = useState(false);
@@ -114,9 +109,7 @@ export default function CalendarItem(props: any) {
         const message = await deleteCalendarHandler(deleteCalendarProps);
         console.info(message);
         props.setCalendar(undefined);
-      } catch (err: any) {
-        return err.message;
-      }
+      } catch (err) {}
       setShowInformModal(false);
       setIsDelete(false);
     };
