@@ -5,6 +5,7 @@ import MainNavigation from "./common/components/Navigation/MainNavigation";
 import Auth from "./user/pages/Auth";
 import Calendars from "./calendar/pages/Calendars";
 import CalendarDetail from "./calendar/pages/CalendarDetail";
+import MemoAll from "./calendar/pages/MemoAll";
 
 import { useAuth } from "./common/hooks/auth-hook";
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Calendars />} />
         <Route path="/detail" element={<CalendarDetail />} />
+        <Route path="/My-all-calendar-memo" element={<MemoAll />} />
       </Routes>
     );
   } else {

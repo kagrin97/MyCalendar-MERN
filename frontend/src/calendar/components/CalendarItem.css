@@ -29,6 +29,10 @@ button {
   justify-content: space-between;
 }
 
+.calendar-detail__header h2 {
+  max-width: 80%;
+}
+
 .calendar-detail__header p {
   opacity: 0.5;
 }

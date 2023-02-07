@@ -10,11 +10,11 @@ const NavLinks = (props: any) => {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink to="/">나의 캘린더</NavLink>
+        <NavLink to="/">캘린더</NavLink>
       </li>
       {token && (
         <li>
-          <NavLink to={`/${userId}/calendar`}>나의 캘린더</NavLink>
+          <NavLink to={`/My-all-calendar-memo`}>모든 메모</NavLink>
         </li>
       )}
       {!token && (
