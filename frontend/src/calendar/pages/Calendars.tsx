@@ -7,6 +7,7 @@ import { useHttpClient } from "../../common/hooks/http-hook";
 import { fomatDate } from "../../common/utils/fomatDate";
 import { getAllCalendarHandler } from "../../common/api/calendarApi";
 import { useAuth } from "../../common/hooks/auth-hook";
+import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
 
 export default function Calendars() {
   const navigate = useNavigate();
@@ -37,10 +38,17 @@ export default function Calendars() {
       const foundCalendar = calendarList.filter(
         (item: any) => item.createdDate === calendarDate
       )[0];
-      navigate("/detail", { state: { calendar: foundCalendar, calendarDate } });
+
+      navigate("/detail", {
+        state: { calendar: foundCalendar, calendarDate },
+      });
     };
     if (calendarDate) {
-      getCalendarDetail();
+      try {
+        getCalendarDetail();
+      } catch (err) {
+        navigate("/detail", { state: { calendar: null, calendarDate } });
+      }
     }
   }, [calendarDate]);
 
@@ -50,6 +58,7 @@ export default function Calendars() {
 
   return (
     <div className="center">
+      {isLoading && <LoadingSpinner asOverlay />}
       {token ? (
         <React.Fragment>
           <Calendar
