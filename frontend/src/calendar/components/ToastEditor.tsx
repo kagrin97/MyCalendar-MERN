@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
@@ -8,9 +6,12 @@ import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import "@toast-ui/editor/dist/i18n/ko-kr";
 import { useHttpClient } from "../../common/hooks/http-hook";
 import { HookMap } from "@toast-ui/editor/types/editor";
+
 import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
+import { useAuth } from "../../common/hooks/auth-hook";
 
 export default function ToastEditor(props: any) {
+  const { token } = useAuth();
   const { isLoading, sendRequest } = useHttpClient();
 
   const onUploadImage: HookMap["addImageBlobHook"] = async (blob, callback) => {
@@ -20,17 +21,18 @@ export default function ToastEditor(props: any) {
       const { imgURL } = await sendRequest(
         "http://localhost:5000/api/calendar/uploadImg",
         "POST",
-        formData
+        formData,
+        {
+          Authorization: "Bearer " + token,
+        }
       );
       callback(`http://localhost:5000/${imgURL}`, "calendar img입니다.");
-    } catch (err) {
-      console.error(err);
-    }
+    } catch (err) {}
   };
 
   return (
     <div>
-      {isLoading && <LoadingSpinner />}
+      {isLoading && <LoadingSpinner asOverlay />}
       <h3>내용 입력</h3>
       <Editor
         ref={props.editorRef}
