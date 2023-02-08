@@ -32,7 +32,7 @@ export const CalendarHttp = {
       userId,
     };
     const { calendar } = await sendRequest(
-      `http://localhost:5000/api/calendar`,
+      `${this.BASE_URL}`,
       "POST",
       JSON.stringify(httpBody),
       {
@@ -56,7 +56,7 @@ export const CalendarHttp = {
       description: htmlContent,
     };
     const { calendar } = await sendRequest(
-      `http://localhost:5000/api/calendar/${calendarId}`,
+      `${this.BASE_URL}/${calendarId}`,
       "PATCH",
       JSON.stringify(httpBody),
       {
@@ -69,7 +69,7 @@ export const CalendarHttp = {
 
   async deleteCalendar({ calendarId, sendRequest, token }: deleteCalendarType) {
     const { message } = await sendRequest(
-      `http://localhost:5000/api/calendar/${calendarId}`,
+      `${this.BASE_URL}/${calendarId}`,
       "DELETE",
       null,
       {

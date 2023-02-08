@@ -6,44 +6,36 @@ import AuthForm from "./UIElements/AuthForm";
 import { useHttpClient } from "../../common/hooks/http-hook";
 import { useAuth } from "../../common/hooks/auth-hook";
 import { useAuthDispatch } from "../../common/context/authContext";
+import {
+  checkExistingUserHandler,
+  createUserHandler,
+} from "../../common/api/userApi";
 
 import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
+import ErrorModal from "../../common/components/UIElements/ErrorModal";
 
 export default function Signup() {
   const auth = useAuth();
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, sendRequest } = useHttpClient();
+  const { isLoading, sendRequest, error, clearError } = useHttpClient();
 
-  const onSubmit = async (data: any) => {
+  const onSubmitSignup = async (data: any) => {
     try {
-      const formData: any = new FormData();
-      formData.append("email", data.email);
-      formData.append("name", data.nickName);
-      formData.append("password", data.password);
-      formData.append("image", data.image ? data.image[0] : undefined);
-
-      const { userId, token } = await sendRequest(
-        "http://localhost:5000/api/users/signup",
-        "POST",
-        formData
-      );
-
+      const { userId, token } = await createUserHandler(data, sendRequest);
       dispatch({ type: "SET_AUTH_SUCCESS", data: { userId, token } });
       auth.login(userId, token);
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       dispatch({ type: "SET_AUTH_ERROR" });
     }
-    return;
   };
 
   const [imgFile, setImgFile] = useState("img/default-Avatar.png");
   const imgRef: any = useRef();
 
   const savePreViewFile = () => {
-    console.log(imgRef.current);
     if (imgRef.current.files.length === 0) {
       setImgFile("img/default-Avatar.png");
       return;
@@ -59,22 +51,7 @@ export default function Signup() {
 
   const checkExistingUser = async (email: string | undefined) => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/checkExistingEmail",
-        {
-          method: "POST",
-          body: JSON.stringify({ email }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(responseData.message);
-      }
+      await checkExistingUserHandler(email);
     } catch (err: any) {
       return err.message;
     }
@@ -83,8 +60,9 @@ export default function Signup() {
   return (
     <React.Fragment>
       {isLoading && <LoadingSpinner asOverlay />}
+      <ErrorModal error={error} onClear={clearError} />
       <AuthForm
-        onSubmit={onSubmit}
+        onSubmit={onSubmitSignup}
         imgFile={imgFile}
         imgRef={imgRef}
         savePreViewFile={savePreViewFile}
