@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./MemoAll.css";
+import MemoAllView from "./MemoAllView";
 
-import { useAuth } from "../../common/hooks/auth-hook";
-import { useHttpClient } from "../../common/hooks/http-hook";
-import { getAllCalendarHandler } from "../../common/api/calendarApi";
-import CalendarCard from "../../common/components/UIElements/CalendarCard";
+import { useAuth } from "../../../common/hooks/auth-hook";
+import { useHttpClient } from "../../../common/hooks/http-hook";
+import { getAllCalendarHandler } from "../../../common/api/calendarApi";
 
 export default function MemoAll() {
   const navigate = useNavigate();
@@ -36,18 +36,11 @@ export default function MemoAll() {
     }
   };
 
-  return (
-    <div className="MemoAll-container">
-      <div className="MemoAll-items">
-        {calendarList.map((calendar, index) => (
-          <div className="MemoAll-item" key={index}>
-            <CalendarCard
-              onClick={() => onClickDetail(calendar)}
-              cardContents={calendar}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  const props = {
+    isLoading,
+    calendarList,
+    onClickDetail,
+  };
+
+  return <MemoAllView {...props} />;
 }

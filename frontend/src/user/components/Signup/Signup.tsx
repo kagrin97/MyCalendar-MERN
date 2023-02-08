@@ -1,18 +1,15 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import AuthForm from "./UIElements/AuthForm";
-
-import { useHttpClient } from "../../common/hooks/http-hook";
-import { useAuth } from "../../common/hooks/auth-hook";
-import { useAuthDispatch } from "../../common/context/authContext";
+import { useHttpClient } from "../../../common/hooks/http-hook";
+import { useAuth } from "../../../common/hooks/auth-hook";
+import { useAuthDispatch } from "../../../common/context/authContext";
 import {
   checkExistingUserHandler,
   SignupHandler,
-} from "../../common/api/userApi";
+} from "../../../common/api/userApi";
 
-import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
-import ErrorModal from "../../common/components/UIElements/ErrorModal";
+import SignupView from "./SignupView";
 
 export default function Signup() {
   const auth = useAuth();
@@ -38,7 +35,6 @@ export default function Signup() {
   const savePreViewFile = () => {
     if (imgRef.current.files.length === 0) {
       setImgFile("img/default-Avatar.png");
-      return;
     }
 
     const file = imgRef.current.files[0];
@@ -57,18 +53,16 @@ export default function Signup() {
     }
   };
 
-  return (
-    <React.Fragment>
-      {isLoading && <LoadingSpinner asOverlay />}
-      <ErrorModal error={error} onClear={clearError} />
-      <AuthForm
-        onSubmit={onSubmitSignup}
-        imgFile={imgFile}
-        imgRef={imgRef}
-        savePreViewFile={savePreViewFile}
-        checkExistingUser={checkExistingUser}
-        signup={true}
-      />
-    </React.Fragment>
-  );
+  const props = {
+    isLoading,
+    error,
+    clearError,
+    onSubmitSignup,
+    imgFile,
+    imgRef,
+    savePreViewFile,
+    checkExistingUser,
+  };
+
+  return <SignupView {...props} />;
 }

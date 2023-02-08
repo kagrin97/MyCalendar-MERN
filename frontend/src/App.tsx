@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import MainNavigation from "./common/components/Navigation/MainNavigation";
-import Auth from "./user/pages/Auth";
-import Calendars from "./calendar/pages/Calendars";
-import CalendarDetail from "./calendar/pages/CalendarDetail";
-import MemoAll from "./calendar/pages/MemoAll";
+import Auth from "./user/pages/Auth/Auth";
+import Calendars from "./calendar/pages/Calendars/Calendars";
+import CalendarDetail from "./calendar/pages/CalendarDetail/CalendarDetail";
+import MemoAll from "./calendar/pages/MemoAll/MemoAll";
 
 import { useAuth } from "./common/hooks/auth-hook";
 

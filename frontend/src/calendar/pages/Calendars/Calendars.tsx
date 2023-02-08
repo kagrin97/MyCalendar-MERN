@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Calendar from "react-calendar";
+
+import CalendarsView from "./CalendarsView";
+
 import "react-calendar/dist/Calendar.css";
 import "./Calendars.css";
 
-import { useHttpClient } from "../../common/hooks/http-hook";
-import { fomatDate } from "../../common/utils/fomatDate";
-import { getAllCalendarHandler } from "../../common/api/calendarApi";
-import { useAuth } from "../../common/hooks/auth-hook";
-import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
-
-import { BsCheckLg } from "react-icons/bs";
-import CalendarCard from "../../common/components/UIElements/CalendarCard";
+import { useHttpClient } from "../../../common/hooks/http-hook";
+import { fomatDate } from "../../../common/utils/fomatDate";
+import { getAllCalendarHandler } from "../../../common/api/calendarApi";
+import { useAuth } from "../../../common/hooks/auth-hook";
 
 export default function Calendars() {
   const navigate = useNavigate();
@@ -84,45 +82,17 @@ export default function Calendars() {
     return false;
   };
 
-  return (
-    <div className="">
-      {isLoading && <LoadingSpinner asOverlay />}
-      {token ? (
-        <div className="calendar-container">
-          <Calendar
-            onChange={onChange}
-            value={value}
-            onClickDay={getCalendarByDate}
-            formatDay={(locale, date) =>
-              date.toLocaleString("en", { day: "numeric" })
-            }
-            next2Label={null}
-            prev2Label={null}
-            showNeighboringMonth={false}
-            tileContent={({ activeStartDate, date, view }) =>
-              view === "month" && existingCalendar(date) ? (
-                <div className="calendar-icon">
-                  <BsCheckLg />
-                </div>
-              ) : null
-            }
-          />
+  const props = {
+    isLoading,
+    token,
+    onChange,
+    value,
+    getCalendarByDate,
+    existingCalendar,
+    showCard,
+    cardContents,
+    onClickDetail,
+  };
 
-          {showCard &&
-            (cardContents ? (
-              <CalendarCard
-                onClick={onClickDetail}
-                cardContents={cardContents}
-              />
-            ) : (
-              <CalendarCard onClick={onClickDetail} cardContents={null} />
-            ))}
-        </div>
-      ) : (
-        <div className="container center">
-          <h3>로그인을 먼저 해주세요</h3>
-        </div>
-      )}
-    </div>
-  );
+  return <CalendarsView {...props} />;
 }
