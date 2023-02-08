@@ -28,8 +28,13 @@ export default function Calendars() {
     async function getAllCalendarList() {
       try {
         const foundList = await getAllCalendarHandler(userId, sendRequest);
+        if (typeof foundList === "string") {
+          throw new Error(foundList);
+        }
         setCalendarList(foundList);
-      } catch (err) {}
+      } catch (err: any) {
+        console.error(err.message);
+      }
     }
     if (userId) {
       getAllCalendarList();
@@ -46,10 +51,10 @@ export default function Calendars() {
       )[0];
       setCardContents(foundCalendar);
     };
-    if (calendarDate) {
+    if (calendarDate && calendarList.length > 0) {
       getCalendarDetail();
     }
-  }, [calendarDate]);
+  }, [calendarDate, calendarList]);
 
   const onClickDetail = () => {
     if (cardContents) {

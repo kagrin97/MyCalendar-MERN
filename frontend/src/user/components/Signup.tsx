@@ -75,7 +75,6 @@ export default function Signup() {
 
   return (
     <React.Fragment>
-      {isLoading && <LoadingSpinner asOverlay />}
       <AuthForm
         onSubmit={onSubmit}
         imgFile={imgFile}
