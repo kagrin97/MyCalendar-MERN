@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Signup.css";
 
 import { useHttpClient } from "../../../common/hooks/http-hook";
 import { useAuth } from "../../../common/hooks/auth-hook";

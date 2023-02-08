@@ -22,9 +22,9 @@ export default function CalendarCard(props: any) {
         ) : (
           <React.Fragment>
             <div className="calendar-card__contents">
-              <h3>아직 아무것도 작성되지 않았습니다.</h3>
+              <h3>제목 </h3>
             </div>
-            <Button onClick={props.onClick}>작성하러 가기</Button>
+            <Button onClick={props.onClick}>작성하기</Button>
           </React.Fragment>
         )}
       </Card>
