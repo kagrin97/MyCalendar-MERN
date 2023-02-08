@@ -14,7 +14,7 @@ export default function Login() {
   const dispatch = useAuthDispatch();
 
   const auth = useAuth();
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
 
   const onSubmit = async (data: any) => {
     try {

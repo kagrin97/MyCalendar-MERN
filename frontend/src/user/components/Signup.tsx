@@ -59,15 +59,22 @@ export default function Signup() {
 
   const checkExistingUser = async (email: string | undefined) => {
     try {
-      await sendRequest(
+      const response = await fetch(
         "http://localhost:5000/api/users/checkExistingEmail",
-        "POST",
-        JSON.stringify({ email }),
         {
-          "Content-Type": "application/json",
+          method: "POST",
+          body: JSON.stringify({ email }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
-      return;
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      }
     } catch (err: any) {
       return err.message;
     }
@@ -75,6 +82,7 @@ export default function Signup() {
 
   return (
     <React.Fragment>
+      {isLoading && <LoadingSpinner asOverlay />}
       <AuthForm
         onSubmit={onSubmit}
         imgFile={imgFile}
