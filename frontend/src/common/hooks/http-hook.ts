@@ -9,6 +9,8 @@ export const useHttpClient = () => {
   const sendRequest = useCallback(
     async (url: string, method = "GET", body?: any, headers?: any) => {
       setIsLoading(true);
+      let start = new Date().getTime();
+
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
 
@@ -30,7 +32,19 @@ export const useHttpClient = () => {
           throw new Error(responseData.message);
         }
 
-        setIsLoading(false);
+        let end = new Date().getTime();
+
+        const notFlashLoadingSpinner = () => {
+          if (end - start < 200) {
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 200);
+          } else {
+            setIsLoading(false);
+          }
+        };
+        notFlashLoadingSpinner();
+
         return responseData;
       } catch (err: any) {
         console.error(err);
