@@ -79,6 +79,8 @@ export default function Calendars() {
     return false;
   };
 
+  console.log(cardContents);
+
   return (
     <div className="">
       {isLoading && <LoadingSpinner asOverlay />}
@@ -102,8 +104,10 @@ export default function Calendars() {
               ) : null
             }
           />
-          {showCard && cardContents && (
+          {showCard && cardContents ? (
             <CalendarCard onClick={onClickDetail} cardContents={cardContents} />
+          ) : (
+            <CalendarCard onClick={onClickDetail} cardContents={null} />
           )}
         </div>
       ) : (

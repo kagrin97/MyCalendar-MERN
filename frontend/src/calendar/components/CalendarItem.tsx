@@ -123,7 +123,7 @@ export default function CalendarItem(props: any) {
 
   return (
     <React.Fragment>
-      {isLoading && <LoadingSpinner />}
+      {isLoading && <LoadingSpinner asOverlay />}
       <ErrorModal error={error} onClear={clearError} />
       <Card>
         <div className="calendar-detail">
@@ -176,8 +176,16 @@ export default function CalendarItem(props: any) {
           ) : (
             <React.Fragment>
               <div className="calendar-detail__header">
-                <h2>{props.calendar?.title || "제목"}</h2>
-                <p>{minusToDot(props.calendar.createdDate)}</p>
+                {props.calendar ? (
+                  <React.Fragment>
+                    <h2>{props.calendar?.title}</h2>
+                    <p>{minusToDot(props.calendar?.createdDate)}</p>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <h2>제목</h2>
+                  </React.Fragment>
+                )}
               </div>
               <div className="calendar-detail__description">
                 {props.calendar?.description ? (

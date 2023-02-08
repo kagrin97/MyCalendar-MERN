@@ -5,7 +5,7 @@ import "./NavLinks.css";
 import { useAuth } from "../../hooks/auth-hook";
 
 const NavLinks = (props: any) => {
-  const { token, logout, userId } = useAuth();
+  const { token, logout } = useAuth();
 
   return (
     <ul className="nav-links">
@@ -24,7 +24,9 @@ const NavLinks = (props: any) => {
       )}
       {token && (
         <li>
-          <button onClick={logout}>LOGOUT</button>
+          <NavLink to="/" onClick={logout}>
+            LOGOUT
+          </NavLink>
         </li>
       )}
     </ul>
