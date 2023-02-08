@@ -18,9 +18,9 @@ export default function Auth() {
 
   return (
     <Card className="center">
-      {authMode ? <Signup /> : <Login />}
+      {authMode ? <Login /> : <Signup />}
       <Button inverse onClick={toggleAuthMode}>
-        {authMode ? "로그인페이지로" : "회원가입페이지로"}
+        {authMode ? "회원가입페이지로" : "로그인페이지로"}
       </Button>
     </Card>
   );

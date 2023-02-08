@@ -24,7 +24,7 @@ const NavLinks = (props: any) => {
       )}
       {token && (
         <li>
-          <NavLink to="/" onClick={logout}>
+          <NavLink to="/auth" onClick={logout}>
             LOGOUT
           </NavLink>
         </li>
