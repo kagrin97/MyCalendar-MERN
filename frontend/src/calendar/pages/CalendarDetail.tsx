@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import "./CalendarDetail.css";
+
 import CalendarItem from "../components/CalendarItem";
 
 export default function CalendarDetail() {
@@ -11,7 +13,7 @@ export default function CalendarDetail() {
   const [calendarItem, setCalendarItem] = useState(calendar);
 
   return (
-    <div>
+    <div className="calendar-detail">
       <CalendarItem
         calendar={calendarItem}
         setCalendar={setCalendarItem}

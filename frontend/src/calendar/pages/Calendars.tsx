@@ -80,7 +80,7 @@ export default function Calendars() {
   };
 
   return (
-    <div className="center">
+    <div className="">
       {isLoading && <LoadingSpinner asOverlay />}
       {token ? (
         <div className="calendar-container">

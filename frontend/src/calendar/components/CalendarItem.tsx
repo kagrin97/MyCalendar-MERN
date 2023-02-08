@@ -5,6 +5,7 @@ import "./CalendarItem.css";
 
 import ToastEditor from "./ToastEditor";
 import ToastViewer from "./ToastViewer";
+
 import Button from "../../common/components/UIElements/Button";
 import ErrorModal from "../../common/components/UIElements/ErrorModal";
 import { useHttpClient } from "../../common/hooks/http-hook";
@@ -12,6 +13,7 @@ import { useHttpClient } from "../../common/hooks/http-hook";
 import { Editor } from "@toast-ui/react-editor";
 import Modal from "../../common/components/UIElements/Modal";
 import Card from "../../common/components/UIElements/Card";
+import minusToDot from "../../common/utils/minusToDot";
 
 import {
   createCalendarHandler,
@@ -175,7 +177,7 @@ export default function CalendarItem(props: any) {
             <React.Fragment>
               <div className="calendar-detail__header">
                 <h2>{props.calendar?.title || "제목"}</h2>
-                <p>{props.calendar.createdDate.replaceAll("-", " | ")}</p>
+                <p>{minusToDot(props.calendar.createdDate)}</p>
               </div>
               <div className="calendar-detail__description">
                 {props.calendar?.description ? (
