@@ -8,7 +8,7 @@ import { useAuth } from "../../common/hooks/auth-hook";
 import { useAuthDispatch } from "../../common/context/authContext";
 import {
   checkExistingUserHandler,
-  createUserHandler,
+  SignupHandler,
 } from "../../common/api/userApi";
 
 import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
@@ -23,7 +23,7 @@ export default function Signup() {
 
   const onSubmitSignup = async (data: any) => {
     try {
-      const { userId, token } = await createUserHandler(data, sendRequest);
+      const { userId, token } = await SignupHandler(data, sendRequest);
       dispatch({ type: "SET_AUTH_SUCCESS", data: { userId, token } });
       auth.login(userId, token);
       navigate("/");

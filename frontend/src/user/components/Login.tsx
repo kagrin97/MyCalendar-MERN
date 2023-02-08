@@ -7,6 +7,8 @@ import { useHttpClient } from "../../common/hooks/http-hook";
 import { useAuth } from "../../common/hooks/auth-hook";
 import { useAuthDispatch } from "../../common/context/authContext";
 import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
+import { LoginHandler } from "../../common/api/userApi";
+import ErrorModal from "../../common/components/UIElements/ErrorModal";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -14,22 +16,14 @@ export default function Login() {
   const dispatch = useAuthDispatch();
 
   const auth = useAuth();
-  const { isLoading, sendRequest } = useHttpClient();
+  const { isLoading, sendRequest, error, clearError } = useHttpClient();
 
   const onSubmit = async (data: any) => {
     try {
-      const httpBody = { email: data.email, password: data.password };
-      const { userId, token } = await sendRequest(
-        "http://localhost:5000/api/users/login",
-        "POST",
-        JSON.stringify(httpBody),
-        {
-          "Content-Type": "application/json",
-        }
-      );
+      const { userId, token } = await LoginHandler(data, sendRequest);
       auth.login(userId, token);
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       dispatch({ type: "SET_AUTH_ERROR" });
     }
   };
@@ -37,6 +31,7 @@ export default function Login() {
   return (
     <React.Fragment>
       {isLoading && <LoadingSpinner asOverlay />}
+      <ErrorModal error={error} onClear={clearError} />
       <AuthForm onSubmit={onSubmit} />
     </React.Fragment>
   );

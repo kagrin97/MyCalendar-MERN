@@ -20,7 +20,7 @@ export const UserHttp = {
     }
   },
 
-  async createUser(data: any, sendRequest: any) {
+  async Signup(data: any, sendRequest: any) {
     const formData: any = new FormData();
     formData.append("email", data.email);
     formData.append("name", data.nickName);
@@ -28,5 +28,17 @@ export const UserHttp = {
     formData.append("image", data.image ? data.image[0] : undefined);
 
     return await sendRequest(`${this.BASE_URL}/signup`, "POST", formData);
+  },
+
+  async Login(data: any, sendRequest: any) {
+    const httpBody = { email: data.email, password: data.password };
+    return await sendRequest(
+      "http://localhost:5000/api/users/login",
+      "POST",
+      JSON.stringify(httpBody),
+      {
+        "Content-Type": "application/json",
+      }
+    );
   },
 };
