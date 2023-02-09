@@ -15,12 +15,21 @@ export default function MemoAll() {
 
   const { isLoading, sendRequest } = useHttpClient();
 
-  const [calendarList, setCalendarList] = useState([]);
+  const [calendarList, setCalendarList] = useState<CalendarType[]>([]);
+
+  const SortDescendingByDate = (foundList: CalendarType[]) => {
+    return foundList.sort((a, b) => {
+      const dateA = new Date(a.createdDate).getTime();
+      const dateB = new Date(b.createdDate).getTime();
+      return dateB - dateA;
+    });
+  };
 
   useEffect(() => {
     const getMyMemo = async () => {
       const foundList = await getAllCalendarHandler(userId, sendRequest);
-      setCalendarList(foundList);
+      const sortedList = SortDescendingByDate(Object.values(foundList));
+      setCalendarList(sortedList);
     };
     getMyMemo();
   }, []);
