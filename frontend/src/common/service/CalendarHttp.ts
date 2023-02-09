@@ -15,7 +15,7 @@ export const CalendarHttp = {
       return calendar;
     } catch (err: unknown) {
       if (err instanceof Error) {
-        return err.message;
+        throw err.message;
       }
     }
   },

@@ -27,9 +27,11 @@ export default function MemoAll() {
 
   useEffect(() => {
     const getMyMemo = async () => {
-      const foundList = await getAllCalendarHandler(userId, sendRequest);
-      const sortedList = SortDescendingByDate(Object.values(foundList));
-      setCalendarList(sortedList);
+      try {
+        const foundList = await getAllCalendarHandler(userId, sendRequest);
+        const sortedList = SortDescendingByDate(Object.values(foundList));
+        setCalendarList(sortedList);
+      } catch (err) {}
     };
     getMyMemo();
   }, []);

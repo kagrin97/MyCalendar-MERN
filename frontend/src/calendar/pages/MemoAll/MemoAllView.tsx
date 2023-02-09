@@ -17,14 +17,18 @@ export default function MemoAllView({
     <div className="MemoAll-container">
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="MemoAll-items">
-        {calendarList.map((calendar: CalendarType, index: number) => (
-          <div className="MemoAll-item" key={index}>
-            <CalendarCard
-              onClick={() => onClickDetail(calendar)}
-              cardContents={calendar}
-            />
-          </div>
-        ))}
+        {calendarList.length ? (
+          calendarList.map((calendar: CalendarType, index: number) => (
+            <div className="MemoAll-item" key={index}>
+              <CalendarCard
+                onClick={() => onClickDetail(calendar)}
+                cardContents={calendar}
+              />
+            </div>
+          ))
+        ) : (
+          <div className="container center">아직 작성된 메모가 없습니다</div>
+        )}
       </div>
     </div>
   );

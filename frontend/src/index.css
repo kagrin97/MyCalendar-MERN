@@ -22,6 +22,10 @@ body {
   background: #f8efed;
 }
 
+.container {
+  height: 100vh;
+}
+
 .slide-in-left-enter {
   transform: translateX(-100%);
 }
