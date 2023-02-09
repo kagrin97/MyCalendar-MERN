@@ -1,13 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import MainNavigation from "./common/components/Navigation/MainNavigation";
 import Auth from "./user/pages/Auth/Auth";
 import Calendars from "./calendar/pages/Calendars/Calendars";
-import CalendarDetail from "./calendar/pages/CalendarDetail/CalendarDetail";
-import MemoAll from "./calendar/pages/MemoAll/MemoAll";
 
 import { useAuth } from "./common/hooks/auth-hook";
+import LoadingSpinner from "./common/components/UIElements/LoadingSpinner";
+
+const MemoAll = React.lazy(() => import("./calendar/pages/MemoAll/MemoAll"));
+const CalendarDetail = React.lazy(
+  () => import("./calendar/pages/CalendarDetail/CalendarDetail")
+);
 
 function App() {
   const { token } = useAuth();
@@ -32,7 +36,17 @@ function App() {
   return (
     <Router>
       <MainNavigation />
-      <main>{routes}</main>
+      <main>
+        <Suspense
+          fallback={
+            <div className="center">
+              <LoadingSpinner asOverlay />
+            </div>
+          }
+        >
+          {routes}
+        </Suspense>
+      </main>
     </Router>
   );
 }

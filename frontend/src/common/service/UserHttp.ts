@@ -4,7 +4,7 @@ import { LoginDataType } from "../../user/components/Login/type";
 import { SignupDataType } from "../../user/components/Signup/type";
 
 export const UserHttp = {
-  BASE_URL: "http://localhost:5000/api/users",
+  BASE_URL: process.env.REACT_APP_BACKEND_URL,
 
   async checkExistingUser(email: string | undefined) {
     try {
@@ -41,7 +41,7 @@ export const UserHttp = {
   async Login(data: LoginDataType, sendRequest: sendRequestType) {
     const httpBody = { email: data.email, password: data.password };
     return await sendRequest(
-      "http://localhost:5000/api/users/login",
+      `${this.BASE_URL}/users/login`,
       "POST",
       JSON.stringify(httpBody),
       {

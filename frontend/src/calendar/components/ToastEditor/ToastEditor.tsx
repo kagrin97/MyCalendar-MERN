@@ -21,7 +21,7 @@ export default function ToastEditor(props: OtherPropsType) {
       const formData: FormData = new FormData();
       formData.append("image", blob);
       const { imgURL } = await sendRequest(
-        "http://localhost:5000/api/calendar/uploadImg",
+        `${process.env.REACT_APP_BACKEND_URL}/calendar/uploadImg`,
         "POST",
         formData,
         {

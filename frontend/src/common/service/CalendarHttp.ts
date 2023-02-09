@@ -7,7 +7,7 @@ import {
 import { sendRequestType } from "../types/http";
 
 export const CalendarHttp = {
-  BASE_URL: "http://localhost:5000/api/calendar",
+  BASE_URL: process.env.REACT_APP_BACKEND_URL,
 
   async getAll(userId: string | null, sendRequest: sendRequestType) {
     try {
