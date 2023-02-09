@@ -7,7 +7,14 @@ import "./CalendarCard.css";
 
 import minusToDot from "../../utils/minusToDot";
 
-export default function CalendarCard(props: any) {
+import { CalendarType } from "../../types/calendar";
+
+interface CalendarCardProps {
+  cardContents: CalendarType | null;
+  onClick?: () => void;
+}
+
+export default function CalendarCard(props: CalendarCardProps) {
   return (
     <div className="calendar-card__container">
       <Card className="CalendarCard">

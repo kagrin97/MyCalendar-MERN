@@ -10,13 +10,15 @@ import { HookMap } from "@toast-ui/editor/types/editor";
 import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
 import { useAuth } from "../../../common/hooks/auth-hook";
 
-export default function ToastEditor(props: any) {
+import { OtherPropsType } from "./type";
+
+export default function ToastEditor(props: OtherPropsType) {
   const { token } = useAuth();
   const { isLoading, sendRequest } = useHttpClient();
 
   const onUploadImage: HookMap["addImageBlobHook"] = async (blob, callback) => {
     try {
-      const formData: any = new FormData();
+      const formData: FormData = new FormData();
       formData.append("image", blob);
       const { imgURL } = await sendRequest(
         "http://localhost:5000/api/calendar/uploadImg",

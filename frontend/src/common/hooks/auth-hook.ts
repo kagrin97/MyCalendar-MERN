@@ -7,7 +7,9 @@ export const useAuth = () => {
 
   const dispatch = useAuthDispatch();
 
-  const [tokenExpirationDate, setTokenExpirationDate] = useState<any>();
+  const [tokenExpirationDate, setTokenExpirationDate] = useState<
+    string | Date | null
+  >();
 
   const login = useCallback(
     (uid: string, token: string, expirationDate?: string) => {

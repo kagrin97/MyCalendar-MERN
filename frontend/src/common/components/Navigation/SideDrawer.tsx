@@ -4,7 +4,13 @@ import { CSSTransition } from "react-transition-group";
 
 import "./SideDrawer.css";
 
-const SideDrawer = (props: any) => {
+type Props = {
+  show: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+};
+
+const SideDrawer = (props: Props) => {
   const content = (
     <CSSTransition
       in={props.show}

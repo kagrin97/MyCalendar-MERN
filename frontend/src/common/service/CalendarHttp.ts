@@ -4,15 +4,19 @@ import {
   deleteCalendarType,
 } from "../types/calendar";
 
+import { sendRequestType } from "../types/http";
+
 export const CalendarHttp = {
   BASE_URL: "http://localhost:5000/api/calendar",
 
-  async getAll(userId: string | null, sendRequest: any) {
+  async getAll(userId: string | null, sendRequest: sendRequestType) {
     try {
       const { calendar } = await sendRequest(`${this.BASE_URL}/user/${userId}`);
       return calendar;
-    } catch (err: any) {
-      return err.message;
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        return err.message;
+      }
     }
   },
 
@@ -40,6 +44,7 @@ export const CalendarHttp = {
         Authorization: "Bearer " + token,
       }
     );
+    console.log(calendar);
     return calendar;
   },
 
@@ -71,7 +76,7 @@ export const CalendarHttp = {
     const { message } = await sendRequest(
       `${this.BASE_URL}/${calendarId}`,
       "DELETE",
-      null,
+      undefined,
       {
         Authorization: "Bearer " + token,
       }

@@ -7,7 +7,7 @@ const initialAuthState = {
 };
 
 // onSuccess
-const success = (data: any) => ({
+const success = (data: { userId: string; token: string }) => ({
   isLoggedIn: true,
   userId: data.userId,
   token: data.token,

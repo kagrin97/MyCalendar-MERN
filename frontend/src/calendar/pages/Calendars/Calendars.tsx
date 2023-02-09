@@ -11,6 +11,8 @@ import { fomatDate } from "../../../common/utils/fomatDate";
 import { getAllCalendarHandler } from "../../../common/api/calendarApi";
 import { useAuth } from "../../../common/hooks/auth-hook";
 
+import { CalendarType } from "../../../common/types/calendar";
+
 export default function Calendars() {
   const navigate = useNavigate();
 
@@ -30,8 +32,8 @@ export default function Calendars() {
           throw new Error(foundList);
         }
         setCalendarList(foundList);
-      } catch (err: any) {
-        console.error(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) console.error(err.message);
       }
     }
     if (userId) {
@@ -39,13 +41,13 @@ export default function Calendars() {
     }
   }, [userId]);
 
-  const [cardContents, setCardContents] = useState<any>();
+  const [cardContents, setCardContents] = useState<CalendarType>();
 
   // setState를 동기로 받기위한 처리
   useEffect(() => {
     const getCalendarDetail = () => {
       const foundCalendar = calendarList.filter(
-        (item: any) => item.createdDate === calendarDate
+        (cal: CalendarType) => cal.createdDate === calendarDate
       )[0];
       setCardContents(foundCalendar);
     };
@@ -66,7 +68,7 @@ export default function Calendars() {
 
   const [showCard, setShowCard] = useState(false);
 
-  const getCalendarByDate = (day: any) => {
+  const getCalendarByDate = (day: Date) => {
     setCalendarDate(fomatDate(day));
     setShowCard(true);
   };

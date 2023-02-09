@@ -1,3 +1,8 @@
+import { sendRequestType } from "../types/http";
+
+import { LoginDataType } from "../../user/components/Login/type";
+import { SignupDataType } from "../../user/components/Signup/type";
+
 export const UserHttp = {
   BASE_URL: "http://localhost:5000/api/users",
 
@@ -15,22 +20,25 @@ export const UserHttp = {
       if (!response.ok) {
         throw new Error(responseData.message);
       }
-    } catch (err: any) {
-      throw new Error(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        throw new Error(err.message);
+      }
     }
   },
 
-  async Signup(data: any, sendRequest: any) {
-    const formData: any = new FormData();
+  async Signup(data: SignupDataType, sendRequest: sendRequestType) {
+    const formData: FormData = new FormData();
     formData.append("email", data.email);
     formData.append("name", data.nickName);
     formData.append("password", data.password);
-    formData.append("image", data.image ? data.image[0] : undefined);
-
+    if (data.image && data.image[0] instanceof Blob) {
+      formData.append("image", data.image[0]);
+    }
     return await sendRequest(`${this.BASE_URL}/signup`, "POST", formData);
   },
 
-  async Login(data: any, sendRequest: any) {
+  async Login(data: LoginDataType, sendRequest: sendRequestType) {
     const httpBody = { email: data.email, password: data.password };
     return await sendRequest(
       "http://localhost:5000/api/users/login",

@@ -4,7 +4,7 @@ export const useHttpClient = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>();
 
-  const activeHttpRequests: any = useRef([]);
+  const activeHttpRequests = useRef<AbortController[]>([]);
 
   const sendRequest = useCallback(
     async (url: string, method = "GET", body?: any, headers?: any) => {
@@ -25,7 +25,7 @@ export const useHttpClient = () => {
         const responseData = await response.json();
 
         activeHttpRequests.current = activeHttpRequests.current.filter(
-          (reqCtrl: any) => reqCtrl !== httpAbortCtrl
+          (reqCtrl: AbortController) => reqCtrl !== httpAbortCtrl
         );
 
         if (!response.ok) {
@@ -46,11 +46,13 @@ export const useHttpClient = () => {
         notFlashLoadingSpinner();
 
         return responseData;
-      } catch (err: any) {
-        console.error(err);
-        setError(err.message);
-        setIsLoading(false);
-        throw err;
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error(err);
+          setError(err.message);
+          setIsLoading(false);
+          throw err;
+        }
       }
     },
     []
@@ -62,7 +64,9 @@ export const useHttpClient = () => {
 
   useEffect(() => {
     return () => {
-      activeHttpRequests.current.forEach((abortCtrl: any) => abortCtrl.abort());
+      activeHttpRequests.current.forEach((abortCtrl: AbortController) =>
+        abortCtrl.abort()
+      );
     };
   }, []);
 

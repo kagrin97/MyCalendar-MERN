@@ -1,5 +1,7 @@
 import { CalendarHttp } from "../service/CalendarHttp";
 
+import { sendRequestType } from "../types/http";
+
 import {
   CreateCalendarType,
   updateCalendarType,
@@ -8,7 +10,7 @@ import {
 
 export const getAllCalendarHandler = (
   userId: string | null,
-  sendRequest: any
+  sendRequest: sendRequestType
 ) => CalendarHttp.getAll(userId, sendRequest);
 
 export const createCalendarHandler = ({

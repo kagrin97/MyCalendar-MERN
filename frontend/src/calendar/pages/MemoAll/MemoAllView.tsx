@@ -1,10 +1,11 @@
 import CalendarCard from "../../../common/components/UIElements/CalendarCard";
 import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
+import { CalendarType } from "../../../common/types/calendar";
 
 export interface PropsType {
   isLoading: Boolean;
-  calendarList: any;
-  onClickDetail: (calendar: any) => void;
+  calendarList: CalendarType[];
+  onClickDetail: (calendar: CalendarType) => void;
 }
 
 export default function MemoAllView({
@@ -16,7 +17,7 @@ export default function MemoAllView({
     <div className="MemoAll-container">
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="MemoAll-items">
-        {calendarList.map((calendar: any, index: number) => (
+        {calendarList.map((calendar: CalendarType, index: number) => (
           <div className="MemoAll-item" key={index}>
             <CalendarCard
               onClick={() => onClickDetail(calendar)}

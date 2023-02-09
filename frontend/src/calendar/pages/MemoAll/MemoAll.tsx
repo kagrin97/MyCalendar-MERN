@@ -7,6 +7,7 @@ import MemoAllView from "./MemoAllView";
 import { useAuth } from "../../../common/hooks/auth-hook";
 import { useHttpClient } from "../../../common/hooks/http-hook";
 import { getAllCalendarHandler } from "../../../common/api/calendarApi";
+import { CalendarType } from "../../../common/types/calendar";
 
 export default function MemoAll() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function MemoAll() {
     getMyMemo();
   }, []);
 
-  const onClickDetail = (calendar: any) => {
+  const onClickDetail = (calendar: CalendarType) => {
     if (calendar) {
       const createdDate = calendar.createdDate;
       navigate("/detail", {

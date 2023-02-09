@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./NavLinks.css";
 import { useAuth } from "../../hooks/auth-hook";
 
-const NavLinks = (props: any) => {
+const NavLinks = () => {
   const { token, logout } = useAuth();
 
   return (

@@ -1,13 +1,15 @@
 import { Dispatch, SetStateAction } from "react";
 
+import { CalendarType } from "../../../common/types/calendar";
+
 export interface PropsType {
-  isLoading: Boolean;
+  isLoading: boolean;
   token: string | null;
   onChange: Dispatch<SetStateAction<Date>>;
   value: Date;
-  getCalendarByDate: (day: any) => void;
-  existingCalendar: (date: Date) => Boolean;
-  showCard: Boolean;
-  cardContents: any;
+  getCalendarByDate: (day: Date) => void;
+  existingCalendar: (date: Date) => boolean;
+  showCard: boolean;
+  cardContents: CalendarType | undefined;
   onClickDetail: () => void;
 }

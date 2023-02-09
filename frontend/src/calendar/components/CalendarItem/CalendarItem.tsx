@@ -20,12 +20,10 @@ import {
 } from "../../../common/types/calendar";
 import { useAuth } from "../../../common/hooks/auth-hook";
 
-interface FormValue {
-  title: string;
-  description: string;
-}
+import { CalendarType } from "../../../common/types/calendar";
+import { OtherPropsType, FormValue } from "./type";
 
-export default function CalendarItem(props: any) {
+export default function CalendarItem(props: OtherPropsType) {
   const { isLoading, sendRequest, error, clearError } = useHttpClient();
   const { userId, token } = useAuth();
 
@@ -50,15 +48,15 @@ export default function CalendarItem(props: any) {
 
   const editorRef = useRef<Editor>(null);
 
-  const applyCalendar = (calendar: any) => {
+  const applyCalendar = (calendar: CalendarType) => {
     props.setCalendar(calendar);
     toggleEditMode();
   };
 
-  const onUpdateCalendar = async (data: any) => {
+  const onUpdateCalendar = async ({ title }: { title: string }) => {
     try {
       const updateCalendarProps: updateCalendarType = {
-        title: data.title,
+        title,
         calendarId: props.calendar.id,
         sendRequest,
         editorRef,
@@ -69,10 +67,10 @@ export default function CalendarItem(props: any) {
     } catch (err) {}
   };
 
-  const onCreateCalendar = async (data: any) => {
+  const onCreateCalendar = async ({ title }: { title: string }) => {
     try {
       const createCalendarProps: CreateCalendarType = {
-        title: data.title,
+        title,
         createdDate: props.calendarDate,
         userId,
         sendRequest,

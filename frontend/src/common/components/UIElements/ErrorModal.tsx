@@ -1,7 +1,12 @@
 import Modal from "./Modal";
 import Button from "./Button";
 
-const ErrorModal = (props: any) => {
+interface ErrorModalProps {
+  onClear: () => void;
+  error: string | null | undefined;
+}
+
+const ErrorModal = (props: ErrorModalProps) => {
   return (
     <Modal
       onCancel={props.onClear}
