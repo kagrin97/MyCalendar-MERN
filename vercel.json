@@ -18,12 +18,10 @@
   ],
   "routes": [
     {
-      "handle": "filesystem",
       "src": "backend/build/index.html",
       "dest": "/"
     },
     {
-      "handle": "filesystem",
       "src": "backend/build/static/(.*)",
       "dest": "/static/$1"
     }
