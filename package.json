@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "front": "cd frontend/ && npm run start",
-    "back": "cd backend/ && npm run dev"
+    "back": "cd backend/ && npm run dev",
+    "deploy": "cd frontend/ && npm ci && npm run build && cp -r build ../backend/ && cd .. && cd build/ && npm ci && npm start"
   },
   "author": "",
   "license": "ISC",

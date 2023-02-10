@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/npm",
+      "config": {
+        "command": "npm install && npm run build"
+      }
+    },
+    {
+      "src": "backend/package.json",
+      "use": "@vercel/npm",
+      "config": {
+        "command": "cp -r frontend/build backend/ && npm install && node app.js"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem",
+      "src": "backend/build/index.html",
+      "dest": "/"
+    },
+    {
+      "handle": "filesystem",
+      "src": "backend/build/static/(.*)",
+      "dest": "/static/$1"
+    }
+  ]
+}
