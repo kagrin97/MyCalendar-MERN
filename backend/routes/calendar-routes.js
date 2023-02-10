@@ -3,7 +3,11 @@ const { check } = require("express-validator");
 
 const calendarControllers = require("../controllers/calendar-controllers");
 const checkAuth = require("../middleware/check-auth");
-const fileUpload = require("../middleware/file-upload");
+// cloudinary도입으로 이용가치가 없어진 코드입니다.
+//const fileUpload = require("../middleware/file-upload");
+
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 const router = express.Router();
 
@@ -15,7 +19,7 @@ router.use(checkAuth);
 
 router.post(
   "/uploadImg",
-  fileUpload.single("image"),
+  upload.single("image"),
   calendarControllers.uploadImgCalendar
 );
 

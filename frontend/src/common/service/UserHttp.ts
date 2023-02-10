@@ -4,7 +4,7 @@ import { LoginDataType } from "../../user/components/Login/type";
 import { SignupDataType } from "../../user/components/Signup/type";
 
 export const UserHttp = {
-  BASE_URL: process.env.REACT_APP_BACKEND_URL,
+  BASE_URL: process.env.REACT_APP_BACKEND_URL + "/users",
 
   async checkExistingUser(email: string | undefined) {
     try {
@@ -32,8 +32,8 @@ export const UserHttp = {
     formData.append("email", data.email);
     formData.append("name", data.nickName);
     formData.append("password", data.password);
-    if (data.image && data.image[0] instanceof Blob) {
-      formData.append("image", data.image[0]);
+    if (data.image instanceof Blob) {
+      formData.append("image", data.image);
     }
     return await sendRequest(`${this.BASE_URL}/signup`, "POST", formData);
   },
@@ -41,7 +41,7 @@ export const UserHttp = {
   async Login(data: LoginDataType, sendRequest: sendRequestType) {
     const httpBody = { email: data.email, password: data.password };
     return await sendRequest(
-      `${this.BASE_URL}/users/login`,
+      `${this.BASE_URL}/login`,
       "POST",
       JSON.stringify(httpBody),
       {

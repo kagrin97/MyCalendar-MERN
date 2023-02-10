@@ -7,7 +7,7 @@ import {
 import { sendRequestType } from "../types/http";
 
 export const CalendarHttp = {
-  BASE_URL: process.env.REACT_APP_BACKEND_URL,
+  BASE_URL: process.env.REACT_APP_BACKEND_URL + "/calendar",
 
   async getAll(userId: string | null, sendRequest: sendRequestType) {
     try {
@@ -44,7 +44,6 @@ export const CalendarHttp = {
         Authorization: "Bearer " + token,
       }
     );
-    console.log(calendar);
     return calendar;
   },
 

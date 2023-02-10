@@ -28,8 +28,11 @@ export default function ToastEditor(props: OtherPropsType) {
           Authorization: "Bearer " + token,
         }
       );
-      callback(`http://localhost:5000/${imgURL}`, "calendar img입니다.");
-    } catch (err) {}
+      console.log(imgURL);
+      callback(imgURL, "calendar img입니다.");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

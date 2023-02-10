@@ -22,9 +22,9 @@ export default function Signup() {
   const { isLoading, sendRequest, error, clearError } = useHttpClient();
 
   const onSubmitSignup = async (data: SignupDataType) => {
-    if (imgRef.current && imgRef.current.current) {
-      const input = imgRef.current.current as HTMLInputElement;
-      data.image = Array.from(input.files as FileList);
+    if (imgRef.current && imgRef.current.files) {
+      const img = imgRef.current.files[0];
+      data.image = img;
     }
 
     try {
@@ -40,14 +40,14 @@ export default function Signup() {
   };
 
   const [imgFile, setImgFile] = useState<string>("img/default-Avatar.png");
-  const imgRef = useRef<React.RefObject<HTMLInputElement> | undefined>();
+  const imgRef: any = useRef();
 
   const savePreViewFile = () => {
     if (!imgRef.current) {
       return;
     }
 
-    const input = imgRef.current.current as HTMLInputElement;
+    const input = imgRef.current;
     if (!input || !input.files) {
       setImgFile("img/default-Avatar.png");
       return;

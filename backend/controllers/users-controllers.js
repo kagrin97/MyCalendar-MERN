@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
@@ -73,10 +74,45 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
+  const cloudinary = require("cloudinary").v2;
+
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
+  const cloudinaryImageUpload = (size) => {
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader.upload(
+        req.file.path,
+        { resource_type: "image", width: size, height: size, crop: "limit" },
+        (err, result) => {
+          if (err) {
+            console.error(err);
+            reject(err);
+          }
+          fs.unlink(req.file.path, (err) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+            }
+
+            resolve(result.secure_url);
+          });
+        }
+      );
+    });
+  };
+
+  const [imgURL] = await Promise.all([cloudinaryImageUpload("100")]);
+
   const createdUser = new User({
     name,
     email,
-    image: req.file?.path || "uploads/images/default-Avatar.png",
+    image:
+      imgURL ||
+      "https://res.cloudinary.com/dwtcxchod/image/upload/v1676009191/default-Avatar_olyg4b.png",
     password: hashedPassword,
     calendars: [],
   });
