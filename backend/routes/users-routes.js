@@ -8,8 +8,6 @@ const upload = multer({ dest: "uploads/" });
 
 const router = express.Router();
 
-router.get("/", usersController.getUsers);
-
 router.post(
   "/signup",
   upload.single("image"),

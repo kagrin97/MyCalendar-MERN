@@ -8,17 +8,6 @@ const User = require("../models/user");
 
 const ERROR = require("../constants/error");
 
-const getUsers = async (req, res, next) => {
-  let users;
-  try {
-    users = await User.find({}, "-password");
-  } catch (err) {
-    const error = new HttpError(ERROR.USER.SERVER, 500);
-    return next(error);
-  }
-  res.json({ users: users.map((user) => user.toObject({ getters: true })) });
-};
-
 const checkExistingEmail = async (req, res, next) => {
   const { email } = req.body;
   let existingUser;
@@ -195,7 +184,6 @@ const login = async (req, res, next) => {
   });
 };
 
-exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
 exports.checkExistingEmail = checkExistingEmail;
