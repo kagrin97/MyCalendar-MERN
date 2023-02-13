@@ -33,10 +33,6 @@ app.use("/api/users", usersRoutes);
 app.use("/api/calendar", calendarsRoutes);
 
 app.use((req, res, next) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
-});
-
-app.use((req, res, next) => {
   const error = new HttpError("route를 찾을수 없습니다.", 404);
   throw error;
 });
