@@ -72,6 +72,9 @@ const signup = async (req, res, next) => {
   });
 
   const cloudinaryImageUpload = (size) => {
+    if (!req.file) {
+      return;
+    }
     return new Promise((resolve, reject) => {
       cloudinary.uploader.upload(
         req.file.path,
