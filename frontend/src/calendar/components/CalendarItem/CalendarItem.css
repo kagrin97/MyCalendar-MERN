@@ -24,13 +24,10 @@ button {
   margin: 1rem;
 }
 
-.calendar-detail__header {
-  display: flex;
-  justify-content: space-between;
-}
-
 .calendar-detail__header h2 {
-  max-width: 80%;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .calendar-detail__header p {
