@@ -44,10 +44,12 @@ export default function CalendarsView({
 
           {showCard &&
             (cardContents ? (
-              <CalendarCard
-                onClick={onClickDetail}
-                cardContents={cardContents}
-              />
+              <div className="calendar-card__width block-center">
+                <CalendarCard
+                  onClick={onClickDetail}
+                  cardContents={cardContents}
+                />
+              </div>
             ) : (
               <CalendarCard onClick={onClickDetail} cardContents={null} />
             ))}

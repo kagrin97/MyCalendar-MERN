@@ -24,14 +24,22 @@ export default function CalendarCard(props: CalendarCardProps) {
               <span>{minusToDot(props.cardContents.createdDate)}</span>
               <h3>{props.cardContents && props.cardContents.title}</h3>
             </div>
-            <Button onClick={props.onClick}>상세보기</Button>
+            <div className="block-center">
+              <Button size="small" onClick={props.onClick}>
+                상세보기
+              </Button>
+            </div>
           </React.Fragment>
         ) : (
           <React.Fragment>
             <div className="calendar-card__contents">
               <h3>제목 </h3>
             </div>
-            <Button onClick={props.onClick}>작성하기</Button>
+            <div className="block-center">
+              <Button size="small" onClick={props.onClick}>
+                작성하기
+              </Button>
+            </div>
           </React.Fragment>
         )}
       </Card>

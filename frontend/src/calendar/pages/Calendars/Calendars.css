@@ -80,6 +80,10 @@
   color: black;
 }
 
+.calendar-card__width {
+  width: 90%;
+}
+
 .calendar-container {
   display: flex;
   flex-direction: column;
