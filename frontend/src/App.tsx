@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import MainNavigation from "./common/components/Navigation/MainNavigation";
+import BottomNavigation from "./common/components/Navigation/BottomNavigation";
 import Auth from "./user/pages/Auth/Auth";
 import Calendars from "./calendar/pages/Calendars/Calendars";
 
@@ -47,6 +48,7 @@ function App() {
           {routes}
         </Suspense>
       </main>
+      <BottomNavigation />
     </Router>
   );
 }
