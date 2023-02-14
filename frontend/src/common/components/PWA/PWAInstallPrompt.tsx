@@ -9,7 +9,6 @@ const PWAInstallPrompt = () => {
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
-    console.log(deferredPrompt);
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
