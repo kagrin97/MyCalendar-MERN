@@ -19,8 +19,11 @@ export default function Login() {
 
   const onSubmit = async (data: LoginDataType) => {
     try {
-      const { userId, token } = await LoginHandler(data, sendRequest);
-      auth.login(userId, token);
+      const { userId, token, name, avatar } = await LoginHandler(
+        data,
+        sendRequest
+      );
+      auth.login({ userId, token, name, avatar });
       navigate("/");
     } catch (err: unknown) {
       if (err instanceof Error) {

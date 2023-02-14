@@ -51,7 +51,9 @@ export default function CalendarsView({
                 />
               </div>
             ) : (
-              <CalendarCard onClick={onClickDetail} cardContents={null} />
+              <div className="calendar-card__width block-center">
+                <CalendarCard onClick={onClickDetail} cardContents={null} />
+              </div>
             ))}
         </div>
       ) : (

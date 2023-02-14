@@ -28,9 +28,11 @@ export default function Signup() {
     }
 
     try {
-      const { userId, token } = await SignupHandler(data, sendRequest);
-      dispatch({ type: "SET_AUTH_SUCCESS", data: { userId, token } });
-      auth.login(userId, token);
+      const { userId, token, name, avatar } = await SignupHandler(
+        data,
+        sendRequest
+      );
+      auth.login({ userId, token, name, avatar });
       navigate("/");
     } catch (err: unknown) {
       if (err instanceof Error) {

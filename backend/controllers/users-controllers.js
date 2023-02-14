@@ -128,9 +128,13 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res
-    .status(201)
-    .json({ userId: createdUser.id, email: createdUser.email, token });
+  res.status(201).json({
+    userId: createdUser.id,
+    email: createdUser.email,
+    token,
+    name,
+    avatar: createdUser.image,
+  });
 };
 
 const login = async (req, res, next) => {
@@ -184,6 +188,8 @@ const login = async (req, res, next) => {
     userId: existingUser.id,
     email: existingUser.email,
     token,
+    name: existingUser.name,
+    avatar: existingUser.image,
   });
 };
 

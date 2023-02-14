@@ -2,8 +2,16 @@ import { useState, useCallback, useEffect } from "react";
 
 import { useAuthState, useAuthDispatch } from "../context/authContext";
 
+interface LoginPropsTypes {
+  userId: string;
+  token: string;
+  expirationDate?: string;
+  name: string;
+  avatar: string;
+}
+
 export const useAuth = () => {
-  const { token, userId } = useAuthState();
+  const { token, userId, name, avatar } = useAuthState();
 
   const dispatch = useAuthDispatch();
 
@@ -12,19 +20,24 @@ export const useAuth = () => {
   >();
 
   const login = useCallback(
-    (uid: string, token: string, expirationDate?: string) => {
+    ({ userId, token, expirationDate, name, avatar }: LoginPropsTypes) => {
       const tokenExpirationDate =
         expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60 * 12);
       setTokenExpirationDate(tokenExpirationDate);
       localStorage.setItem(
         "userData",
         JSON.stringify({
-          userId: uid,
-          token: token,
+          userId,
+          token,
           expiration: tokenExpirationDate,
+          name,
+          avatar,
         })
       );
-      dispatch({ type: "SET_AUTH_SUCCESS", data: { userId: uid, token } });
+      dispatch({
+        type: "SET_AUTH_SUCCESS",
+        data: { userId, token, name, avatar },
+      });
     },
     []
   );
@@ -59,9 +72,15 @@ export const useAuth = () => {
       storedData.token &&
       storedData.expiration > new Date().toISOString()
     ) {
-      login(storedData.userId, storedData.token, storedData.expiration);
+      login({
+        userId: storedData.userId,
+        token: storedData.token,
+        expirationDate: storedData.expiration,
+        name: storedData.name,
+        avatar: storedData.avatar,
+      });
     }
   }, [login]);
 
-  return { token, login, logout, userId };
+  return { token, login, logout, userId, name, avatar };
 };

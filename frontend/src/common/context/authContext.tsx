@@ -4,13 +4,22 @@ const initialAuthState = {
   isLoggedIn: false,
   userId: null,
   token: null,
+  name: null,
+  avatar: null,
 };
 
 // onSuccess
-const success = (data: { userId: string; token: string }) => ({
+const success = (data: {
+  userId: string;
+  token: string;
+  name: string;
+  avatar: string;
+}) => ({
   isLoggedIn: true,
   userId: data.userId,
   token: data.token,
+  name: data.name,
+  avatar: data.avatar,
 });
 
 // onError
@@ -18,22 +27,31 @@ const error = () => ({
   isLoggedIn: false,
   userId: null,
   token: null,
+  name: null,
+  avatar: null,
 });
 
 const clean = () => ({
   isLoggedIn: false,
   userId: null,
   token: null,
+  name: null,
+  avatar: null,
 });
 
 type StateType = {
   isLoggedIn: Boolean;
   userId: string | null;
   token: string | null;
+  name: string | null;
+  avatar: string | null;
 };
 
 type ActionType =
-  | { type: "SET_AUTH_SUCCESS"; data: { userId: string; token: string } }
+  | {
+      type: "SET_AUTH_SUCCESS";
+      data: { userId: string; token: string; name: string; avatar: string };
+    }
   | { type: "SET_AUTH_ERROR" }
   | { type: "SET_AUTH_CLEAN" };
 
