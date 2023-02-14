@@ -4,8 +4,10 @@ import { PropsType } from "./type";
 
 import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
 import CalendarCard from "../../../common/components/UIElements/CalendarCard";
+import PWAInstallPrompt from "../../../common/components/PWA/PWAInstallPrompt";
 
 import { BsCheckLg } from "react-icons/bs";
+import React from "react";
 
 export default function CalendarsView({
   isLoading,
@@ -19,8 +21,11 @@ export default function CalendarsView({
   onClickDetail,
 }: PropsType) {
   return (
-    <div className="">
+    <React.Fragment>
       {isLoading && <LoadingSpinner asOverlay />}
+      <div className="pwa-install-prompt">
+        <PWAInstallPrompt />
+      </div>
       {token ? (
         <div className="calendar-container">
           <Calendar
@@ -61,6 +66,6 @@ export default function CalendarsView({
           <h3>로그인을 먼저 해주세요</h3>
         </div>
       )}
-    </div>
+    </React.Fragment>
   );
 }
