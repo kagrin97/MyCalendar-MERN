@@ -1,0 +1,9 @@
+@media (max-width: 740px) {
+  .toastui-editor-popup {
+    margin-left: 10px;
+  }
+  .toastui-editor-dropdown-toolbar {
+    flex-direction: column;
+    height: 200px;
+  }
+}

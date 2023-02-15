@@ -56,13 +56,6 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  try {
-    hashedPassword = await bcrypt.hash(password, 12);
-  } catch (err) {
-    const error = new HttpError(ERROR.USER.SERVER, 500);
-    return next(error);
-  }
-
   const cloudinary = require("cloudinary").v2;
 
   cloudinary.config({

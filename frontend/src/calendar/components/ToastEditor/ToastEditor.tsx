@@ -4,6 +4,7 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
+import "./ToastEditor.css";
 import { useHttpClient } from "../../../common/hooks/http-hook";
 import { HookMap } from "@toast-ui/editor/types/editor";
 
