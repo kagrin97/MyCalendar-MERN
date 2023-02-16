@@ -90,7 +90,7 @@
 
 ## SERVER API 명세서
 
-<a href="https://documenter.getpostman.com/view/21753855/2s93CEwGGG" target="_blank">POSTMAN API 명세서 새 탭에서 열기</a>
+[POSTMAN API 명세서 열기](https://documenter.getpostman.com/view/21753855/2s93CEwGGG)
 
 ## 폴더구조 
 
