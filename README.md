@@ -89,9 +89,21 @@
   - **PATCH/memo** : 유효한 값일떄만 memo 정보를 수정할수있음
 
 ## SERVER API 명세서
-
-[POSTMAN API 명세서 열기](https://documenter.getpostman.com/view/21753855/2s93CEwGGG)
-
+      
+- [POSTMAN API 명세서 열기](https://documenter.getpostman.com/view/21753855/2s93CEwGGG)
+      
+## 제가 블로그에 작성한 프로젝트 진행중 배운점
+      
+- <a href="https://kagrin97-blog.vercel.app/react/React-Hook-Form" target="_blank">React Hook Form으로 회원가입, 로그인 구현하기!</a>
+- <a href="https://kagrin97-blog.vercel.app/react/pwa-beforeInstallPrompt" target="_blank">PWA 페이지에서 앱 설치를 유도해보기 (feat. React)</a>
+- <a href="https://kagrin97-blog.vercel.app/backend/cloudinary-uploadImges" target="_blank">cloudinary에 이미지 업로드 하기!</a>
+- <a href="https://kagrin97-blog.vercel.app/backend/jsonwebtoken" target="_blank">[node.js] JWT(JSON Web Token)을 jsonwebtoken 라이브러리로 사용하기</a>
+- <a href="https://kagrin97-blog.vercel.app/backend/bcrypt&bcryptjs" target="_blank">해쉬 라이브러리 bcrypt, bcryptjs 비교 및 사용법</a>
+- <a href="https://kagrin97-blog.vercel.app/backend/Multer(Node,%20express)" target="_blank">Multer를 사용해 파일 조작(Node, express)</a>
+- <a href="https://kagrin97-blog.vercel.app/db/mongoDB%EB%A5%BCexpress%EC%99%80%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0" target="_blank">mongoDB를 express와 연결하기 (mongoose방법도 추가)</a>
+- <a href="https://kagrin97-blog.vercel.app/server/ec2-httpTohttps" target="_blank">http를 https로 적용하기 (feat. ec2/node.js)</a>      
+- <a href="https://kagrin97-blog.vercel.app/server/ec2-express,mongodb" target="_blank">ec2에 express 앱 배포하기!! (feat. pm2)</a>
+  
 ## 폴더구조 
 
 ```
