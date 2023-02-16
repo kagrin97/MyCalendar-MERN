@@ -57,7 +57,7 @@ export default function CalendarItem(props: OtherPropsType) {
     try {
       const updateCalendarProps: updateCalendarType = {
         title,
-        calendarId: props.calendar.id,
+        calendarId: props.calendar._id,
         sendRequest,
         editorRef,
         token,
