@@ -11,6 +11,7 @@ import {
   createCalendarHandler,
   updateCalendarHandler,
   deleteCalendarHandler,
+  getAllCalendarHandler,
 } from "../../../common/api/calendarApi";
 
 import {
@@ -22,10 +23,13 @@ import { useAuth } from "../../../common/hooks/auth-hook";
 
 import { CalendarType } from "../../../common/types/calendar";
 import { OtherPropsType, FormValue } from "./type";
+import { useCalendarDispatch } from "../../../common/context/calendarContext";
 
 export default function CalendarItem(props: OtherPropsType) {
   const { isLoading, sendRequest, error, clearError } = useHttpClient();
   const { userId, token } = useAuth();
+
+  const calendarDispatch = useCalendarDispatch();
 
   const {
     register,
@@ -53,6 +57,17 @@ export default function CalendarItem(props: OtherPropsType) {
     toggleEditMode();
   };
 
+  const reGetCalendars = async () => {
+    const foundList = await getAllCalendarHandler(userId, sendRequest);
+    if (typeof foundList === "string") {
+      throw new Error(foundList);
+    }
+    calendarDispatch({
+      type: "SET_CALENDAR_SUCCESS",
+      data: foundList,
+    });
+  };
+
   const onUpdateCalendar = async ({ title }: { title: string }) => {
     try {
       const updateCalendarProps: updateCalendarType = {
@@ -64,6 +79,7 @@ export default function CalendarItem(props: OtherPropsType) {
       };
       const calendar = await updateCalendarHandler(updateCalendarProps);
       applyCalendar(calendar);
+      reGetCalendars();
     } catch (err) {}
   };
 
@@ -78,8 +94,8 @@ export default function CalendarItem(props: OtherPropsType) {
         token,
       };
       const calendar = await createCalendarHandler(createCalendarProps);
-
       applyCalendar(calendar);
+      reGetCalendars();
     } catch (err) {}
   };
 
@@ -101,6 +117,7 @@ export default function CalendarItem(props: OtherPropsType) {
         const message = await deleteCalendarHandler(deleteCalendarProps);
         console.info(message);
         props.setCalendar(undefined);
+        reGetCalendars();
       } catch (err) {}
       setShowInformModal(false);
       setIsDelete(false);

@@ -1,3 +1,4 @@
+import { useCalendarDispatch } from "../context/calendarContext";
 import {
   CreateCalendarType,
   updateCalendarType,
@@ -68,6 +69,7 @@ export const CalendarHttp = {
         Authorization: "Bearer " + token,
       }
     );
+
     return calendar;
   },
 

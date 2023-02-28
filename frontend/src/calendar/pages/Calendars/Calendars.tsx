@@ -12,17 +12,22 @@ import { getAllCalendarHandler } from "../../../common/api/calendarApi";
 import { useAuth } from "../../../common/hooks/auth-hook";
 
 import { CalendarType } from "../../../common/types/calendar";
+import {
+  useCalendarDispatch,
+  useCalendarState,
+} from "../../../common/context/calendarContext";
 
 export default function Calendars() {
   const navigate = useNavigate();
 
   const [value, onChange] = useState(new Date());
   const [calendarDate, setCalendarDate] = useState<string | undefined>();
-  const [calendarList, setCalendarList] = useState([]);
-
+  const [calendarList, setCalendarList] = useState(useCalendarState());
   const { userId, token } = useAuth();
 
   const { isLoading, sendRequest } = useHttpClient();
+
+  const calendarDispatch = useCalendarDispatch();
 
   useEffect(() => {
     async function getAllCalendarList() {
@@ -32,11 +37,15 @@ export default function Calendars() {
           throw new Error(foundList);
         }
         setCalendarList(foundList);
+        calendarDispatch({
+          type: "SET_CALENDAR_SUCCESS",
+          data: foundList,
+        });
       } catch (err: unknown) {
         if (err instanceof Error) console.error(err.message);
       }
     }
-    if (userId) {
+    if (userId && calendarList.length === 0) {
       getAllCalendarList();
     }
   }, [userId]);

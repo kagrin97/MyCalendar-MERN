@@ -5,13 +5,16 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 import { AuthProvider } from "./common/context/authContext";
+import { CalendarProvider } from "./common/context/calendarContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <AuthProvider>
-    <App />
+    <CalendarProvider>
+      <App />
+    </CalendarProvider>
   </AuthProvider>
 );
 

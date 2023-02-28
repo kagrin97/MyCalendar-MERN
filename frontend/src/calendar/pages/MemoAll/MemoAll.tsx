@@ -8,6 +8,7 @@ import { useAuth } from "../../../common/hooks/auth-hook";
 import { useHttpClient } from "../../../common/hooks/http-hook";
 import { getAllCalendarHandler } from "../../../common/api/calendarApi";
 import { CalendarType } from "../../../common/types/calendar";
+import { useCalendarState } from "../../../common/context/calendarContext";
 
 export default function MemoAll() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function MemoAll() {
 
   const { isLoading, sendRequest } = useHttpClient();
 
-  const [calendarList, setCalendarList] = useState<CalendarType[]>([]);
+  const [calendarList, setCalendarList] = useState(useCalendarState());
 
   const SortDescendingByDate = (foundList: CalendarType[]) => {
     return foundList.sort((a, b) => {
@@ -33,7 +34,12 @@ export default function MemoAll() {
         setCalendarList(sortedList);
       } catch (err) {}
     };
-    getMyMemo();
+    if (calendarList.length === 0) {
+      getMyMemo();
+    } else {
+      const sortedList = SortDescendingByDate(Object.values(calendarList));
+      setCalendarList(sortedList);
+    }
   }, []);
 
   const onClickDetail = (calendar: CalendarType) => {

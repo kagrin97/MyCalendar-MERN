@@ -8,7 +8,6 @@ const initialAuthState = {
   avatar: null,
 };
 
-// onSuccess
 const success = (data: {
   userId: string;
   token: string;
@@ -22,7 +21,6 @@ const success = (data: {
   avatar: data.avatar,
 });
 
-// onError
 const error = () => ({
   isLoggedIn: false,
   userId: null,
@@ -57,11 +55,9 @@ type ActionType =
 
 type DispatchType = Dispatch<ActionType>;
 
-//  Context 생성
 const AuthStateContext = createContext<StateType | null>(null);
 const AuthDispatchContext = createContext<DispatchType | null>(null);
 
-// reducer
 function AuthReducer(state: StateType, action: ActionType) {
   switch (action.type) {
     case "SET_AUTH_SUCCESS":
@@ -84,7 +80,6 @@ function AuthReducer(state: StateType, action: ActionType) {
   }
 }
 
-// 위에서 선언한 두가지 Context 들의 Provider 로 감싸주는 컴포넌트
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(AuthReducer, initialAuthState);
 
@@ -97,7 +92,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// State를 쉽게 조회 할 수 있게 해주는 커스텀 Hook
 export function useAuthState() {
   const state = useContext(AuthStateContext);
   if (!state) {
@@ -106,7 +100,6 @@ export function useAuthState() {
   return state;
 }
 
-// Dispatch를 쉽게 사용 할 수 있게 해주는 커스텀 Hook
 export function useAuthDispatch() {
   const dispatch = useContext(AuthDispatchContext);
   if (!dispatch) {
