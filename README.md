@@ -25,22 +25,22 @@
 
 - ### 1-1) Login 
 
-    <div>
-      <video controls width=30% src="https://user-images.githubusercontent.com/75124028/218924780-bdae9b68-e637-4c4b-abc5-5519db212ee9.mp4
+    <div align="center">
+      <video controls width=20% src="https://user-images.githubusercontent.com/75124028/218924780-bdae9b68-e637-4c4b-abc5-5519db212ee9.mp4
     " ></video>
     </div>
 
 - ### 1-2) Signup
 
-  <div>
-      <video controls width=30% src="https://user-images.githubusercontent.com/75124028/218924838-b2729315-039e-4445-b948-8a7c25edb44c.mp4
+  <div align="center">
+      <video controls width=20% src="https://user-images.githubusercontent.com/75124028/218924838-b2729315-039e-4445-b948-8a7c25edb44c.mp4
     "></video>
   <div>
   
 - ### 1-3) Calendar Memo CRUD
 
-  <div>
-  <video controls width=30% src="https://user-images.githubusercontent.com/75124028/218924897-f4e5b3bb-74e6-4911-b3fb-ba47ff3099a9.mp4"></video>
+  <div align="center">
+  <video controls width=20% src="https://user-images.githubusercontent.com/75124028/218924897-f4e5b3bb-74e6-4911-b3fb-ba47ff3099a9.mp4"></video>
 </div>
 <br>
 
@@ -87,6 +87,10 @@
   - **POST/memo** 이미지 생성 : memo를 작성할때 이미지 첨부 가능 첨부시 cloudinary에 이미지 저장 
     
   - **PATCH/memo** : 유효한 값일떄만 memo 정보를 수정할수있음
+
+## ERD
+<p align="center">
+<img width="300px" src="https://user-images.githubusercontent.com/75124028/226619799-903cf774-f18e-4d7f-98e4-fef77f9c5b45.png" /></p>
 
 ## SERVER API 명세서
       
