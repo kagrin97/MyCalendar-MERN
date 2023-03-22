@@ -1,6 +1,6 @@
 # 🗓 [my-calendar](https://my-calendar-mern.vercel.app/)
 
-### 달력 사이트로 사용자가 자신만의 달력에 메모를 할수 있는 앱
+> 달력 사이트로 사용자가 자신만의 달력에 메모를 할수 있는 앱
 </br>
 
 ## 🚀 프로젝트 설명
@@ -26,21 +26,21 @@
 - ### 1-1) Login 
 
     <div align="center">
-      <video controls width=20% src="https://user-images.githubusercontent.com/75124028/218924780-bdae9b68-e637-4c4b-abc5-5519db212ee9.mp4
+      <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924780-bdae9b68-e637-4c4b-abc5-5519db212ee9.mp4
     " ></video>
     </div>
 
 - ### 1-2) Signup
 
   <div align="center">
-      <video controls width=20% src="https://user-images.githubusercontent.com/75124028/218924838-b2729315-039e-4445-b948-8a7c25edb44c.mp4
+      <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924838-b2729315-039e-4445-b948-8a7c25edb44c.mp4
     "></video>
   <div>
   
 - ### 1-3) Calendar Memo CRUD
 
   <div align="center">
-  <video controls width=20% src="https://user-images.githubusercontent.com/75124028/218924897-f4e5b3bb-74e6-4911-b3fb-ba47ff3099a9.mp4"></video>
+  <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924897-f4e5b3bb-74e6-4911-b3fb-ba47ff3099a9.mp4"></video>
 </div>
 <br>
 
@@ -87,14 +87,81 @@
   - **POST/memo** 이미지 생성 : memo를 작성할때 이미지 첨부 가능 첨부시 cloudinary에 이미지 저장 
     
   - **PATCH/memo** : 유효한 값일떄만 memo 정보를 수정할수있음
+<br>
+      
+## 핵심 기능
+      
+### Front
 
+<details>
+<summary>로그인 토큰을 저장, 유효시간 안 자동 로그인, 유효시간 후 자동 삭제</summary>
+<div markdown="1">
+<br>
+
+- 로드인 시 토큰과 토큰 유효시간을 localStorage와 전역상태에 저장
+https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c670f377c1/frontend/src/common/hooks/auth-hook.ts#L22-L43
+<br>
+
+- 페이지 새로고침시 토큰 유효시간이 지나지 않았다면 로그인
+https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c670f377c1/frontend/src/common/hooks/auth-hook.ts#L63-L83
+<br>
+
+- 페이지 새로고침시 토큰 유효시간이 지났다면 자동 로그아웃
+https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c670f377c1/frontend/src/common/hooks/auth-hook.ts#L45-L61
+<br>
+
+<br>
+</div>
+</details>
+
+<details>
+<summary>AbortController로 비동기 작업 취소</summary>
+<div markdown="1">
+<br>
+
+- unmount시 AbortController 인스턴스가 들어있는 activeHttpRequests를 모두 abort 메서드를 실행함으로 비동기 작업취소<br>
+https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c670f377c1/frontend/src/common/hooks/http-hook.ts#L3-L74
+<br>
+
+</div>
+</details>
+      
+### Back
+      
+<details>
+<summary>calendar의 RUD 요청시 토큰 검사</summary>
+<div markdown="1">
+<br>
+
+- 토큰 검사 미들웨어를 구현해서 인증된 사용자만 RUD 요청 동작
+https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c670f377c1/backend/middleware/check-auth.js#L1-L22
+<br>
+
+</div>
+</details>
+      
+<details>
+<summary>image 파일들을 cloudinary 클라우드 서버에 저장</summary>
+<div markdown="1">
+<br>
+
+- image 파일들을 따로 저장
+https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c670f377c1/backend/controllers/calendar-controllers.js#L167-L194
+<br>
+
+</div>
+</details>
+<br>
+      
 ## ERD
 <p align="center">
 <img width="300px" src="https://user-images.githubusercontent.com/75124028/226619799-903cf774-f18e-4d7f-98e4-fef77f9c5b45.png" /></p>
-
+<br>
+      
 ## SERVER API 명세서
       
 - [POSTMAN API 명세서 열기](https://documenter.getpostman.com/view/21753855/2s93CEwGGG)
+<br>
       
 ## 제가 블로그에 작성한 프로젝트 진행중 배운점
       
@@ -107,124 +174,4 @@
 - <a href="https://kagrin97-blog.vercel.app/db/mongoDB%EB%A5%BCexpress%EC%99%80%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0" target="_blank">mongoDB를 express와 연결하기 (mongoose방법도 추가)</a>
 - <a href="https://kagrin97-blog.vercel.app/server/ec2-httpTohttps" target="_blank">http를 https로 적용하기 (feat. ec2/node.js)</a>      
 - <a href="https://kagrin97-blog.vercel.app/server/ec2-express,mongodb" target="_blank">ec2에 express 앱 배포하기!! (feat. pm2)</a>
-  
-## 폴더구조 
-
-```
-myCalendar
-├─ 📁backend
-│  ├─ 📁routes
-│  │  ├─ users-routes.js
-│  │  └─ calendar-routes.js
-│  ├─ 📁controllers
-│  │  ├─ calendar-controllers.js
-│  │  └─ users-controllers.js
-│  ├─ 📁middleware
-│  │  └─ check-auth.js
-│  ├─ 📁models
-│  │  ├─ user.js
-│  │  ├─ http-error.js
-│  │  └─ calendar.js
-│  ├─ app.js
-│  ├─ 📁constants
-│  │  └─ error.js
-│  └─ 📁uploads
-├─ 📁frontend
-│  ├─ 📁src
-│  │  ├─ index.css
-│  │  ├─ calendar
-│  │  │  ├─ 📁components
-│  │  │  │  ├─ 📁ToastEditor
-│  │  │  │  │  ├─ ToastEditor.tsx
-│  │  │  │  │  ├─ ToastEditor.css
-│  │  │  │  │  └─ type.ts
-│  │  │  │  ├─ 📁ToastViewer
-│  │  │  │  │  ├─ type.ts
-│  │  │  │  │  └─ ToastViewer.tsx
-│  │  │  │  └─ 📁CalendarItem
-│  │  │  │     ├─ CalendarItem.css
-│  │  │  │     ├─ type.ts
-│  │  │  │     ├─ CalendarItemView.tsx
-│  │  │  │     └─ CalendarItem.tsx
-│  │  │  └─ 📁pages
-│  │  │     ├─ 📁CalendarDetail
-│  │  │     │  ├─ CalendarDetail.css
-│  │  │     │  ├─ type.ts
-│  │  │     │  ├─ CalendarDetail.tsx
-│  │  │     │  └─ CalendarDetailView.tsx
-│  │  │     ├─ 📁MemoAll
-│  │  │     │  ├─ MemoAll.tsx
-│  │  │     │  ├─ MemoAllView.tsx
-│  │  │     │  └─ MemoAll.css
-│  │  │     └─ 📁Calendars
-│  │  │        ├─ CalendarsView.tsx
-│  │  │        ├─ Calendars.tsx
-│  │  │        ├─ type.ts
-│  │  │        └─ Calendars.css
-│  │  ├─ service-worker.ts
-│  │  ├─ serviceWorkerRegistration.ts
-│  │  ├─ index.tsx
-│  │  ├─ 📁common
-│  │  │  ├─ 📁types
-│  │  │  │  ├─ http.ts
-│  │  │  │  └─ calendar.ts
-│  │  │  ├─ 📁service
-│  │  │  │  ├─ UserHttp.ts
-│  │  │  │  └─ CalendarHttp.ts
-│  │  │  ├─ 📁hooks
-│  │  │  │  ├─ auth-hook.ts
-│  │  │  │  └─ http-hook.ts
-│  │  │  ├─ 📁utils
-│  │  │  │  ├─ minusToDot.ts
-│  │  │  │  └─ fomatDate.ts
-│  │  │  ├─ 📁components
-│  │  │  │  ├─ 📁Navigation
-│  │  │  │  │  ├─ SideDrawer.tsx
-│  │  │  │  │  ├─ MainHeader.css
-│  │  │  │  │  ├─ NavLinks.css
-│  │  │  │  │  ├─ MainNavigation.css
-│  │  │  │  │  ├─ SideDrawer.css
-│  │  │  │  │  ├─ BottomNavigation.css
-│  │  │  │  │  ├─ MainHeader.tsx
-│  │  │  │  │  ├─ NavLinks.tsx
-│  │  │  │  │  ├─ BottomNavigation.tsx
-│  │  │  │  │  └─ MainNavigation.tsx
-│  │  │  │  ├─ 📁UIElements
-│  │  │  │  │  ├─ Modal.css
-│  │  │  │  │  ├─ Card.tsx
-│  │  │  │  │  ├─ Backdrop.css
-│  │  │  │  │  ├─ LoadingSpinner.css
-│  │  │  │  │  ├─ CalendarCard.tsx
-│  │  │  │  │  ├─ Card.css
-│  │  │  │  │  ├─ ErrorModal.tsx
-│  │  │  │  │  ├─ CalendarCard.css
-│  │  │  │  │  ├─ Modal.tsx
-│  │  │  │  │  ├─ Button.css
-│  │  │  │  │  ├─ Button.tsx
-│  │  │  │  │  ├─ Backdrop.tsx
-│  │  │  │  │  └─ LoadingSpinner.tsx
-│  │  │  │  └─ 📁PWA
-│  │  │  │     └─ PWAInstallPrompt.tsx
-│  │  │  ├─ 📁context
-│  │  │  │  └─ authContext.tsx
-│  │  │  └─ 📁api
-│  │  │     ├─ calendarApi.ts
-│  │  │     └─ userApi.ts
-│  │  ├─ 📁user
-│  │  │  ├─ 📁components
-│  │  │  │  ├─ 📁Signup
-│  │  │  │  │  ├─ SignupView.tsx
-│  │  │  │  │  ├─ Signup.css
-│  │  │  │  │  ├─ type.ts
-│  │  │  │  │  └─ Signup.tsx
-│  │  │  │  └─ 📁Login
-│  │  │  │     ├─ Login.css
-│  │  │  │     ├─ type.ts
-│  │  │  │     ├─ Login.tsx
-│  │  │  │     └─ LoginView.tsx
-│  │  │  └─ 📁pages
-│  │  │     └─ 📁Auth
-│  │  │        └─ Auth.tsx
-│  │  └─ App.tsx
-```
   
