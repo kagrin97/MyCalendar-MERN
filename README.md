@@ -3,6 +3,22 @@
 > 달력 사이트로 사용자가 자신만의 달력에 메모를 할수 있는 앱
 </br>
 
+- [1. 데모 영상](#1-데모-영상)
+  - 1-1. Login 
+  - 1-2. Signup
+  - 1-3. Calendar Memo CRUD
+- [2. 구현 기능](#2-구현-기능)
+    - 2-1. Login
+    - 2-2. Signup
+    - 2-3. Calendar memo
+- [3. 핵심 기능](#3-핵심-기능)
+    - Front
+    - Back
+- [4. ERD](#4-erd)
+- [5. SERVER API 명세서](#5-server-api-명세서)
+- [6. 제가 블로그에 작성한 프로젝트 진행중 배운점](#6-제가-블로그에-작성한-프로젝트-진행중-배운점)
+</br>
+
 ## 🚀 프로젝트 설명
 
 - ***Front*** : React, Typescript, PWA
@@ -21,7 +37,8 @@
 
 </br>
 
-## 데모 영상
+
+## 1. 데모 영상
 
 - ### 1-1) Login 
 
@@ -44,7 +61,7 @@
 </div>
 <br>
 
-## 구현 기능
+## 2. 구현 기능
 
 - ## Login
 
@@ -89,7 +106,7 @@
   - **PATCH/memo** : 유효한 값일떄만 memo 정보를 수정할수있음
 <br>
       
-## 핵심 기능
+## 3. 핵심 기능
       
 ### Front
 
@@ -153,17 +170,17 @@ https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c
 </details>
 <br>
       
-## ERD
+## 4. ERD
 <p align="center">
 <img width="300px" src="https://user-images.githubusercontent.com/75124028/226619799-903cf774-f18e-4d7f-98e4-fef77f9c5b45.png" /></p>
 <br>
       
-## SERVER API 명세서
+## 5. SERVER API 명세서
       
 - [POSTMAN API 명세서 열기](https://documenter.getpostman.com/view/21753855/2s93CEwGGG)
 <br>
       
-## 제가 블로그에 작성한 프로젝트 진행중 배운점
+## 6. 제가 블로그에 작성한 프로젝트 진행중 배운점
       
 - <a href="https://kagrin97-blog.vercel.app/react/React-Hook-Form" target="_blank">React Hook Form으로 회원가입, 로그인 구현하기!</a>
 - <a href="https://kagrin97-blog.vercel.app/react/pwa-beforeInstallPrompt" target="_blank">PWA 페이지에서 앱 설치를 유도해보기 (feat. React)</a>
