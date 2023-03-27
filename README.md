@@ -40,25 +40,44 @@
 
 ## 1. 데모 영상
 
-- ### 1-1) Login 
+- <details>
+  <summary>Login 영상</summary>
+  <div markdown="1">
+  <br>
 
-    <div align="center">
-      <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924780-bdae9b68-e637-4c4b-abc5-5519db212ee9.mp4
-    " ></video>
-    </div>
+   <div align="center">
+        <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924780-bdae9b68-e637-4c4b-abc5-5519db212ee9.mp4
+      " ></video>
+      </div>
 
-- ### 1-2) Signup
+  </div>
+  </details>
 
-  <div align="center">
-      <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924838-b2729315-039e-4445-b948-8a7c25edb44c.mp4
-    "></video>
-  <div>
-  
-- ### 1-3) Calendar Memo CRUD
+- <details>
+  <summary>Signup 영상</summary>
+  <div markdown="1">
+  <br>
 
-  <div align="center">
-  <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924897-f4e5b3bb-74e6-4911-b3fb-ba47ff3099a9.mp4"></video>
-</div>
+   <div align="center">
+        <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924838-b2729315-039e-4445-b948-8a7c25edb44c.mp4
+      "></video>
+    <div>
+
+  </div>
+  </details>
+
+- <details>
+  <summary>Calendar Memo CRUD 영상</summary>
+  <div markdown="1">
+  <br>
+
+   <div align="center">
+    <video controls width="10%" src="https://user-images.githubusercontent.com/75124028/218924897-f4e5b3bb-74e6-4911-b3fb-ba47ff3099a9.mp4"></video>
+  </div>
+
+  </div>
+  </details>
+
 <br>
 
 ## 2. 구현 기능
