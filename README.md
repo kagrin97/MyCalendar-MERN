@@ -17,6 +17,7 @@
 - [4. ERD](#4-erd)
 - [5. SERVER API 명세서](#5-server-api-명세서)
 - [6. 제가 블로그에 작성한 프로젝트 진행중 배운점](#6-제가-블로그에-작성한-프로젝트-진행중-배운점)
+- [7. 한계점](#7-한계점)
 </br>
 
 ## 🚀 프로젝트 설명
@@ -210,4 +211,30 @@ https://github.com/kagrin97/MyCalendar-MERN/blob/92319c981c785a64fedcbe97f342e2c
 - <a href="https://kagrin97-blog.vercel.app/db/mongoDB%EB%A5%BCexpress%EC%99%80%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0" target="_blank">mongoDB를 express와 연결하기 (mongoose방법도 추가)</a>
 - <a href="https://kagrin97-blog.vercel.app/server/ec2-httpTohttps" target="_blank">http를 https로 적용하기 (feat. ec2/node.js)</a>      
 - <a href="https://kagrin97-blog.vercel.app/server/ec2-express,mongodb" target="_blank">ec2에 express 앱 배포하기!! (feat. pm2)</a>
+
+## 7. 한계점
+
+<details>
+<summary>jest를 이용해 테스트코드 작성 실패</summary>
+<div markdown="1">
+<br>
+
+**문제** : 모든 기능을 구현하고 나서 jest를 사용해서 테스트 코드를 작성하려고 했지만 toast ui와 react가 버전 충돌이 일어났다.
+<br/>
+
+> 💡 시도한 방법 1 : <br/><br/>toast ui가 react 17버전과 호환이 된다는 에러 메시지를 보고 17버전으로 다운그레이드 하려고 했지만 17버전으로 다운그레이드 시 다른 많은 패키지들도 다운그레이드 해야 하기 때문에 포기했다.
+<br/>
+
+> 💡 시도한 방법 2 : <br/><br/>--legacy-peer-deps를 사용해서 충돌을 무시했지만 이렇게 사용하면 나중에 더 큰 문제가 발생할 것 같아서 포기
+<br/>
+
+> 💡 시도한 방법 3 : <br/><br/>react 18과 호환되는 에디터를 탐색하였지만 에디터 부분과 코드를 다 뜯어 고쳐야 해서 포기했다.
+<br/>
+
+**결론** : 결국 jest로 test 코드 작성은 포기했다. 나중에 다른 에디터로 변경하던가 처음 코드를 작성할 때부터 TDD로 구현했으면 진작에 버전 문제를 확인하고 고칠 수 있었을 것을 하는 아쉬움이 남는다.
+<br>
+
+</div>
+</details>
+<br>
   
