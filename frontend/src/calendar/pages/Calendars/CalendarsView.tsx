@@ -69,7 +69,7 @@ export default function CalendarsView({
     }
     return (
       <div className="container center">
-        <h3>Please log in first</h3>
+        <h3>로그인을 먼저 해주세요.</h3>
       </div>
     );
   };

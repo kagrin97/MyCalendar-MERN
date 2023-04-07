@@ -26,6 +26,11 @@ import { OtherPropsType, FormValue } from "./type";
 import { useCalendarDispatch } from "../../../common/context/calendarContext";
 
 export default function CalendarItem(props: OtherPropsType) {
+  const [showInformModal, setShowInformModal] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+  const [isEdit, setEdit] = useState(false);
+  const editorRef = useRef<Editor>(null);
+
   const { isLoading, sendRequest, error, clearError } = useHttpClient();
   const { userId, token } = useAuth();
 
@@ -43,14 +48,14 @@ export default function CalendarItem(props: OtherPropsType) {
     },
   });
 
-  const [isEdit, setEdit] = useState(false);
+  const closeInformModal = () => {
+    setShowInformModal(false);
+  };
 
   const toggleEditMode = () => {
     setEdit(!isEdit);
     setValue("title", props.calendar?.title || "");
   };
-
-  const editorRef = useRef<Editor>(null);
 
   const applyCalendar = (calendar: CalendarType) => {
     props.setCalendar(calendar);
@@ -99,29 +104,23 @@ export default function CalendarItem(props: OtherPropsType) {
     } catch (err) {}
   };
 
-  const [showInformModal, setShowInformModal] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
-
-  const closeInformModal = () => {
+  const onDeleteCalendar = async () => {
+    try {
+      const deleteCalendarProps: deleteCalendarType = {
+        calendarId: props.calendar._id,
+        sendRequest,
+        token,
+      };
+      const message = await deleteCalendarHandler(deleteCalendarProps);
+      console.info(message);
+      props.setCalendar(undefined);
+      reGetCalendars();
+    } catch (err) {}
     setShowInformModal(false);
+    setIsDelete(false);
   };
 
   useEffect(() => {
-    const onDeleteCalendar = async () => {
-      try {
-        const deleteCalendarProps: deleteCalendarType = {
-          calendarId: props.calendar._id,
-          sendRequest,
-          token,
-        };
-        const message = await deleteCalendarHandler(deleteCalendarProps);
-        console.info(message);
-        props.setCalendar(undefined);
-        reGetCalendars();
-      } catch (err) {}
-      setShowInformModal(false);
-      setIsDelete(false);
-    };
     if (isDelete) {
       onDeleteCalendar();
     }
