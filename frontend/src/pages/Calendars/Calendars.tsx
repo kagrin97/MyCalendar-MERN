@@ -6,16 +6,16 @@ import CalendarsView from "./CalendarsView";
 import "react-calendar/dist/Calendar.css";
 import "./Calendars.css";
 
-import { useHttpClient } from "../../../common/hooks/http-hook";
-import { fomatDate } from "../../../common/utils/fomatDate";
-import { getAllCalendarHandler } from "../../../common/api/calendarApi";
-import { useAuth } from "../../../common/hooks/auth-hook";
+import { useHttpClient } from "../../common/hooks/http-hook";
+import { fomatDate } from "../../common/utils/fomatDate";
+import { getAllCalendarHandler } from "../../common/api/calendarApi";
+import { useAuth } from "../../common/hooks/auth-hook";
 
-import { CalendarType } from "../../../common/types/calendar";
+import { CalendarType } from "../../common/types/calendar";
 import {
   useCalendarDispatch,
   useCalendarState,
-} from "../../../common/context/calendarContext";
+} from "../../common/context/calendarContext";
 
 export default function Calendars() {
   const navigate = useNavigate();

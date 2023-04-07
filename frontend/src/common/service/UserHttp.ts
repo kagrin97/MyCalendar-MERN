@@ -1,7 +1,7 @@
 import { sendRequestType } from "../types/http";
 
-import { LoginDataType } from "../../user/components/Login/type";
-import { SignupDataType } from "../../user/components/Signup/type";
+import { LoginDataType } from "../../pages/UserAuth/components/Login/type";
+import { SignupDataType } from "../../pages/UserAuth/components/Signup/type";
 
 export const UserHttp = {
   BASE_URL: process.env.REACT_APP_BACKEND_URL + "/users",

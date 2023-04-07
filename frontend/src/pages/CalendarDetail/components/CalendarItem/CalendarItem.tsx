@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import "./CalendarItem.css";
 import CalendarItemView from "./CalendarItemView";
 
-import { useHttpClient } from "../../../common/hooks/http-hook";
+import { useHttpClient } from "../../../../common/hooks/http-hook";
 import { Editor } from "@toast-ui/react-editor";
 
 import {
@@ -12,18 +12,18 @@ import {
   updateCalendarHandler,
   deleteCalendarHandler,
   getAllCalendarHandler,
-} from "../../../common/api/calendarApi";
+} from "../../../../common/api/calendarApi";
 
 import {
   CreateCalendarType,
   updateCalendarType,
   deleteCalendarType,
-} from "../../../common/types/calendar";
-import { useAuth } from "../../../common/hooks/auth-hook";
+} from "../../../../common/types/calendar";
+import { useAuth } from "../../../../common/hooks/auth-hook";
 
-import { CalendarType } from "../../../common/types/calendar";
+import { CalendarType } from "../../../../common/types/calendar";
 import { OtherPropsType, FormValue } from "./type";
-import { useCalendarDispatch } from "../../../common/context/calendarContext";
+import { useCalendarDispatch } from "../../../../common/context/calendarContext";
 
 export default function CalendarItem(props: OtherPropsType) {
   const [showInformModal, setShowInformModal] = useState(false);

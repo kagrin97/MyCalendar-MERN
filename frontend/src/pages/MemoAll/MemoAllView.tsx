@@ -1,6 +1,6 @@
-import CalendarCard from "../../../common/components/UIElements/CalendarCard";
-import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
-import { CalendarType } from "../../../common/types/calendar";
+import CalendarCard from "../../common/components/UIElements/CalendarCard";
+import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
+import { CalendarType } from "../../common/types/calendar";
 
 export interface PropsType {
   isLoading: Boolean;

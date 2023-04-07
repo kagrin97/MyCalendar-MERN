@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 
 import LoginView from "./LoginView";
 
-import { useHttpClient } from "../../../common/hooks/http-hook";
-import { useAuth } from "../../../common/hooks/auth-hook";
-import { useAuthDispatch } from "../../../common/context/authContext";
-import { LoginHandler } from "../../../common/api/userApi";
+import { useHttpClient } from "../../../../common/hooks/http-hook";
+import { useAuth } from "../../../../common/hooks/auth-hook";
+import { useAuthDispatch } from "../../../../common/context/authContext";
+import { LoginHandler } from "../../../../common/api/userApi";
 
 import { LoginDataType } from "./type";
 

@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import "./MemoAll.css";
 import MemoAllView from "./MemoAllView";
 
-import { useAuth } from "../../../common/hooks/auth-hook";
-import { useHttpClient } from "../../../common/hooks/http-hook";
-import { getAllCalendarHandler } from "../../../common/api/calendarApi";
-import { CalendarType } from "../../../common/types/calendar";
-import { useCalendarState } from "../../../common/context/calendarContext";
+import { useAuth } from "../../common/hooks/auth-hook";
+import { useHttpClient } from "../../common/hooks/http-hook";
+import { getAllCalendarHandler } from "../../common/api/calendarApi";
+import { CalendarType } from "../../common/types/calendar";
+import { useCalendarState } from "../../common/context/calendarContext";
 
 export default function MemoAll() {
   const navigate = useNavigate();

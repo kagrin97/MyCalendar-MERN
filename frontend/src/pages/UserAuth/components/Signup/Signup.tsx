@@ -2,13 +2,13 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
-import { useHttpClient } from "../../../common/hooks/http-hook";
-import { useAuth } from "../../../common/hooks/auth-hook";
-import { useAuthDispatch } from "../../../common/context/authContext";
+import { useHttpClient } from "../../../../common/hooks/http-hook";
+import { useAuth } from "../../../../common/hooks/auth-hook";
+import { useAuthDispatch } from "../../../../common/context/authContext";
 import {
   checkExistingUserHandler,
   SignupHandler,
-} from "../../../common/api/userApi";
+} from "../../../../common/api/userApi";
 
 import SignupView from "./SignupView";
 

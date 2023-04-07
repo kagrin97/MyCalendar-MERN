@@ -2,9 +2,9 @@ import { UserHttp } from "../service/UserHttp";
 
 import { sendRequestType } from "../types/http";
 
-import { SignupDataType } from "../../user/components/Signup/type";
+import { SignupDataType } from "../../pages/UserAuth/components/Signup/type";
 
-import { LoginDataType } from "../../user/components/Login/type";
+import { LoginDataType } from "../../pages/UserAuth/components/Login/type";
 
 export const checkExistingUserHandler = (email: string | undefined) =>
   UserHttp.checkExistingUser(email);

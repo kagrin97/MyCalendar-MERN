@@ -1,4 +1,4 @@
-import CalendarItem from "../../components/CalendarItem/CalendarItem";
+import CalendarItem from "./components/CalendarItem/CalendarItem";
 
 import "./CalendarDetail.css";
 

@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 
 import { PropsType } from "./type";
 
-import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
-import ErrorModal from "../../../common/components/UIElements/ErrorModal";
-import Button from "../../../common/components/UIElements/Button";
+import LoadingSpinner from "../../../../common/components/UIElements/LoadingSpinner";
+import ErrorModal from "../../../../common/components/UIElements/ErrorModal";
+import Button from "../../../../common/components/UIElements/Button";
 
 interface FormValue {
   nickName: string;

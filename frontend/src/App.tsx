@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import MainNavigation from "./common/components/Navigation/MainNavigation";
 import BottomNavigation from "./common/components/Navigation/BottomNavigation";
-import Auth from "./user/pages/Auth/Auth";
-import Calendars from "./calendar/pages/Calendars/Calendars";
+import Auth from "./pages/UserAuth/UserAuth";
+import Calendars from "./pages/Calendars/Calendars";
 
 import { useAuth } from "./common/hooks/auth-hook";
 import LoadingSpinner from "./common/components/UIElements/LoadingSpinner";
 
-const MemoAll = React.lazy(() => import("./calendar/pages/MemoAll/MemoAll"));
+const MemoAll = React.lazy(() => import("./pages/MemoAll/MemoAll"));
 const CalendarDetail = React.lazy(
-  () => import("./calendar/pages/CalendarDetail/CalendarDetail")
+  () => import("./pages/CalendarDetail/CalendarDetail")
 );
 
 function App() {

@@ -2,11 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
 
-import ErrorModal from "../../../common/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
+import ErrorModal from "../../../../common/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../../../common/components/UIElements/LoadingSpinner";
 import { PropsType } from "./type";
 
-import Button from "../../../common/components/UIElements/Button";
+import Button from "../../../../common/components/UIElements/Button";
 
 interface FormValue {
   email: string;

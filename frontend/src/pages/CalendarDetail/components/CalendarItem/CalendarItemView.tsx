@@ -5,13 +5,13 @@ import { PropsType } from "./type";
 import ToastEditor from "../ToastEditor/ToastEditor";
 import ToastViewer from "../ToastViewer/ToastViewer";
 
-import Button from "../../../common/components/UIElements/Button";
-import ErrorModal from "../../../common/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
+import Button from "../../../../common/components/UIElements/Button";
+import ErrorModal from "../../../../common/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../../../common/components/UIElements/LoadingSpinner";
 
-import Modal from "../../../common/components/UIElements/Modal";
-import Card from "../../../common/components/UIElements/Card";
-import minusToDot from "../../../common/utils/minusToDot";
+import Modal from "../../../../common/components/UIElements/Modal";
+import Card from "../../../../common/components/UIElements/Card";
+import minusToDot from "../../../../common/utils/minusToDot";
 
 export default function CalendarItemView({
   isLoading,

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { CalendarType } from "../../../common/types/calendar";
+import { CalendarType } from "../../common/types/calendar";
 
 export interface PropsType {
   calendar: CalendarType;

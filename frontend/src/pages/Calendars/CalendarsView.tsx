@@ -3,9 +3,9 @@ import Calendar from "react-calendar";
 import { BsCheckLg } from "react-icons/bs";
 
 import { PropsType } from "./type";
-import LoadingSpinner from "../../../common/components/UIElements/LoadingSpinner";
-import CalendarCard from "../../../common/components/UIElements/CalendarCard";
-import PWAInstallPrompt from "../../../common/components/PWA/PWAInstallPrompt";
+import LoadingSpinner from "../../common/components/UIElements/LoadingSpinner";
+import CalendarCard from "../../common/components/UIElements/CalendarCard";
+import PWAInstallPrompt from "../../common/components/PWA/PWAInstallPrompt";
 
 export default function CalendarsView({
   isLoading,

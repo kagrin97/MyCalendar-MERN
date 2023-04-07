@@ -6,7 +6,7 @@ import {
   FieldErrors,
 } from "react-hook-form";
 
-import { CalendarType } from "../../../common/types/calendar";
+import { CalendarType } from "../../../../common/types/calendar";
 
 export interface FormValue {
   title: string;

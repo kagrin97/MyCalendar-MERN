@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import Signup from "../../components/Signup/Signup";
-import Login from "../../components/Login/Login";
-import Button from "../../../common/components/UIElements/Button";
+import Signup from "./components/Signup/Signup";
+import Login from "./components/Login/Login";
+import Button from "../../common/components/UIElements/Button";
 
-import Card from "../../../common/components/UIElements/Card";
+import Card from "../../common/components/UIElements/Card";
 
-export default function Auth() {
+export default function UserAuth() {
   const [authMode, setAuthMode] = useState(true);
 
   const toggleAuthMode = () => {
