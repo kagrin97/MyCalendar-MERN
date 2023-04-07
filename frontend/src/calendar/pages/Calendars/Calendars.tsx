@@ -23,47 +23,26 @@ export default function Calendars() {
   const [value, onChange] = useState(new Date());
   const [calendarDate, setCalendarDate] = useState<string | undefined>();
   const [calendarList, setCalendarList] = useState(useCalendarState());
+  const [cardContents, setCardContents] = useState<CalendarType>();
+  const [showCard, setShowCard] = useState(false);
+
   const { userId, token } = useAuth();
 
   const { isLoading, sendRequest } = useHttpClient();
 
   const calendarDispatch = useCalendarDispatch();
 
-  useEffect(() => {
-    async function getAllCalendarList() {
-      try {
-        const foundList = await getAllCalendarHandler(userId, sendRequest);
-        if (typeof foundList === "string") {
-          throw new Error(foundList);
-        }
-        setCalendarList(foundList);
-        calendarDispatch({
-          type: "SET_CALENDAR_SUCCESS",
-          data: foundList,
-        });
-      } catch (err: unknown) {
-        if (err instanceof Error) console.error(err.message);
-      }
-    }
-    if (userId && calendarList.length === 0) {
-      getAllCalendarList();
-    }
-  }, [userId]);
+  const getCalendarByDate = (day: Date) => {
+    setCalendarDate(fomatDate(day));
+    setShowCard(true);
+  };
 
-  const [cardContents, setCardContents] = useState<CalendarType>();
-
-  // setState를 동기로 받기위한 처리
-  useEffect(() => {
-    const getCalendarDetail = () => {
-      const foundCalendar = calendarList.filter(
-        (cal: CalendarType) => cal.createdDate === calendarDate
-      )[0];
-      setCardContents(foundCalendar);
-    };
-    if (calendarDate && calendarList.length > 0) {
-      getCalendarDetail();
-    }
-  }, [calendarDate, calendarList]);
+  const checkExistingCalendar = (date: Date) => {
+    return (
+      calendarList?.some((cal) => cal["createdDate"] === fomatDate(date)) ??
+      false
+    );
+  };
 
   const onClickDetail = () => {
     if (cardContents) {
@@ -75,23 +54,42 @@ export default function Calendars() {
     navigate("/detail", { state: { calendar: null, calendarDate } });
   };
 
-  const [showCard, setShowCard] = useState(false);
-
-  const getCalendarByDate = (day: Date) => {
-    setCalendarDate(fomatDate(day));
-    setShowCard(true);
-  };
-
-  const existingCalendar = (date: Date) => {
-    if (calendarList) {
-      for (let cal of calendarList) {
-        if (cal["createdDate"] === fomatDate(date)) {
-          return true;
+  useEffect(() => {
+    async function getAllCalendarList() {
+      try {
+        const foundList = await getAllCalendarHandler(userId, sendRequest);
+        if (typeof foundList === "string") {
+          throw new Error(foundList);
+        }
+        setCalendarList(foundList);
+        calendarDispatch({ type: "SET_CALENDAR_SUCCESS", data: foundList });
+      } catch (err) {
+        if (err instanceof Error) {
+          console.error(err.message);
         }
       }
     }
-    return false;
+
+    const shouldFetchCalendarList = userId && calendarList.length === 0;
+    if (shouldFetchCalendarList) {
+      getAllCalendarList();
+    }
+  }, [userId, calendarList.length, calendarDispatch, sendRequest]);
+
+  const getCalendarDetail = (
+    calendarDate: string,
+    calendarList: CalendarType[]
+  ) => {
+    return calendarList.find(
+      (cal: CalendarType) => cal.createdDate === calendarDate
+    );
   };
+
+  useEffect(() => {
+    if (calendarDate && calendarList.length > 0) {
+      setCardContents(getCalendarDetail(calendarDate, calendarList));
+    }
+  }, [calendarDate, calendarList]);
 
   const props = {
     isLoading,
@@ -99,7 +97,7 @@ export default function Calendars() {
     onChange,
     value,
     getCalendarByDate,
-    existingCalendar,
+    checkExistingCalendar,
     showCard,
     cardContents,
     onClickDetail,

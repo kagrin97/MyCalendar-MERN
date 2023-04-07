@@ -8,7 +8,7 @@ export interface PropsType {
   onChange: Dispatch<SetStateAction<Date>>;
   value: Date;
   getCalendarByDate: (day: Date) => void;
-  existingCalendar: (date: Date) => boolean;
+  checkExistingCalendar: (date: Date) => boolean;
   showCard: boolean;
   cardContents: CalendarType | undefined;
   onClickDetail: () => void;

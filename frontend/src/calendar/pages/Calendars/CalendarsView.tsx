@@ -15,7 +15,7 @@ export default function CalendarsView({
   onChange,
   value,
   getCalendarByDate,
-  existingCalendar,
+  checkExistingCalendar,
   showCard,
   cardContents,
   onClickDetail,
@@ -39,7 +39,7 @@ export default function CalendarsView({
             prev2Label={null}
             showNeighboringMonth={false}
             tileContent={({ activeStartDate, date, view }) =>
-              view === "month" && existingCalendar(date) ? (
+              view === "month" && checkExistingCalendar(date) ? (
                 <div className="calendar-icon">
                   <BsCheckLg />
                 </div>
