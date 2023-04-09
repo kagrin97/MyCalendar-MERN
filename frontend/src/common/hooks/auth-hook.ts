@@ -1,13 +1,17 @@
 import { useState, useCallback, useEffect } from "react";
 
 import { useAuthState, useAuthDispatch } from "../context/authContext";
-
-interface LoginPropsTypes {
+interface UserProps {
   userId: string;
   token: string;
-  expirationDate?: string;
   name: string;
   avatar: string;
+}
+interface LoginProps extends UserProps {
+  expirationDate?: string;
+}
+interface ReLoginProps extends UserProps {
+  expiration: string;
 }
 
 export const useAuth = () => {
@@ -27,7 +31,7 @@ export const useAuth = () => {
     expirationDate,
     name,
     avatar,
-  }: LoginPropsTypes) => {
+  }: LoginProps) => {
     const tokenExpirationDate =
       expirationDate ||
       new Date(new Date().getTime() + TWELEVE_HOURS_MILLI_SECONDS);
@@ -45,7 +49,7 @@ export const useAuth = () => {
   };
 
   const login = useCallback(
-    ({ userId, token, expirationDate, name, avatar }: LoginPropsTypes) => {
+    ({ userId, token, expirationDate, name, avatar }: LoginProps) => {
       saveTokenInLocalStorage({ userId, token, expirationDate, name, avatar });
       dispatch({
         type: "SET_AUTH_SUCCESS",
@@ -78,8 +82,6 @@ export const useAuth = () => {
   }, [token, logout, tokenExpirationDate, startLogoutTimer]);
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userData") || "");
-
     const checkTokenAndRelogin = () => {
       if (
         storedData &&
@@ -96,7 +98,12 @@ export const useAuth = () => {
       }
     };
 
-    checkTokenAndRelogin();
+    const userData = localStorage.getItem("userData") || "";
+    let storedData: ReLoginProps | undefined;
+    if (userData) {
+      storedData = JSON.parse(userData);
+      checkTokenAndRelogin();
+    }
   }, [login]);
 
   return { token, login, logout, userId, name, avatar };
